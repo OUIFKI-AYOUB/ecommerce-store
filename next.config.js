@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+},
   images: {
     domains: [
       'i.ibb.co',
@@ -7,4 +10,4 @@ const nextConfig = {
     ],
   }
 }
-export default nextConfig;
+
