@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
@@ -64,9 +64,6 @@ const Gallery = ({ media }: GalleryProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
-  const [scale, setScale] = useState(1);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const imageRef = useRef<HTMLDivElement>(null);
 
   const nextMedia = () => {
     setSelectedIndex((prevIndex) => (prevIndex + 1) % media.length);
@@ -79,48 +76,13 @@ const Gallery = ({ media }: GalleryProps) => {
   const handleZoom = (imageUrl: string) => {
     setZoomedImage(imageUrl);
     setIsZoomed(true);
-    setScale(1); // Reset scale when zooming in
-    setPosition({ x: 0, y: 0 }); // Reset position
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when zoomed
   };
 
   const closeZoom = () => {
     setIsZoomed(false);
     setZoomedImage(null);
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-    document.body.style.overflow = 'unset';
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length === 2) {
-      // Pinch-to-zoom
-      e.preventDefault();
-      const touch1 = e.touches[0];
-      const touch2 = e.touches[1];
-      const distance = Math.hypot(
-        touch2.clientX - touch1.clientX,
-        touch2.clientY - touch1.clientY
-      );
-
-      const newScale = Math.max(1, distance / 100); // Adjust scale based on touch distance
-      setScale(newScale);
-    } else if (e.touches.length === 1) {
-      // Panning
-      const touch = e.touches[0];
-      setPosition({
-        x: touch.clientX - (imageRef.current?.clientWidth || 0) / 2,
-        y: touch.clientY - (imageRef.current?.clientHeight || 0) / 2,
-      });
-    }
-  };
-
-  const handleDoubleTap = () => {
-    if (scale === 1) {
-      setScale(2); // Zoom in on double tap
-    } else {
-      setScale(1); // Reset zoom on double tap
-    }
+    document.body.style.overflow = 'unset'; // Re-enable scrolling
   };
 
   return (
@@ -194,7 +156,7 @@ const Gallery = ({ media }: GalleryProps) => {
 
       {isZoomed && zoomedImage && (
         <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center touch-none"
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
           onClick={closeZoom}
         >
           <button
@@ -202,22 +164,13 @@ const Gallery = ({ media }: GalleryProps) => {
               e.stopPropagation();
               closeZoom();
             }}
-            onTouchEnd={(e) => {
-              e.stopPropagation();
-              closeZoom();
-            }}
             className="fixed top-4 right-4 text-white p-4 hover:bg-white/10 rounded-full z-[60]"
-            style={{ touchAction: 'manipulation' }}
           >
             <X size={24} className='m-[30px] md:m-[10px]' />
           </button>
           <div 
-            ref={imageRef}
-            className="relative w-[90vw] h-[90vh] overflow-hidden"
+            className="relative w-[90vw] h-[90vh]"
             onClick={(e) => e.stopPropagation()}
-            onTouchMove={handleTouchMove}
-            onDoubleClick={handleDoubleTap}
-            style={{ touchAction: 'none' }}
           >
             <Image
               src={zoomedImage}
@@ -225,10 +178,6 @@ const Gallery = ({ media }: GalleryProps) => {
               fill
               className="object-contain"
               priority
-              style={{
-                transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
-                transition: 'transform 0.2s ease',
-              }}
             />
           </div>
         </div>
