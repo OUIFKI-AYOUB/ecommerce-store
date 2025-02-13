@@ -28,7 +28,7 @@ const HomePage = async () => {
   });
 
   return (
-    <div className="touch-pan-x touch-pan-y allow-zoom">
+    <div className="touch-pan-x touch-pan-y">
       <Container>
         <MotionDiv 
           className="space-y-16 pb-10"
