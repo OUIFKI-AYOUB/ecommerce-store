@@ -159,16 +159,21 @@ const Gallery = ({ media }: GalleryProps) => {
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center touch-none"
           onClick={closeZoom}
         >
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              closeZoom();
-            }}
-            className="fixed top-4 right-4 text-white p-4 hover:bg-white/10 rounded-full z-[60]"
-            style={{ touchAction: 'manipulation' }}
-          >
-            <X size={24} />
-          </button>
+<button
+  onClick={(e) => {
+    e.stopPropagation();
+    closeZoom();
+  }}
+  onTouchEnd={(e) => {
+    e.stopPropagation();
+    closeZoom();
+  }}
+  className="fixed top-4 right-4 text-white p-4 hover:bg-white/10 rounded-full z-[60]"
+  style={{ touchAction: 'manipulation' }}
+>
+<X size={24} />
+  
+</button>
           <div 
             className="relative w-[90vw] h-[90vh]"
             onClick={(e) => e.stopPropagation()}

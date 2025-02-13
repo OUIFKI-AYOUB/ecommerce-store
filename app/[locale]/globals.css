@@ -2,43 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
-/* Base Layout */
-html, body, :root {
-  height: 100%;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: auto;
-=======
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-
+/* Ensure full height and no overflow */
+html,
+body,
 :root {
- height: 100%;
->>>>>>> 4f622d2 (newa)
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
-html, body {
-  overflow-x: hidden;
-  position: relative;
-  width: 100%;
-}
-
-/* Enhanced Touch Controls */
-* {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: text;
-  user-select: text;
-}
-
-body {
-  touch-action: pan-x pan-y;
-}
-
-/* Theme Configuration */
+/* Apply base styles */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -94,7 +68,10 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+}
 
+/* Apply base styles to all elements */
+@layer base {
   * {
     @apply border-border;
   }
