@@ -28,15 +28,8 @@ export const metadata: Metadata = {
   icons: {
     icon: '/images/log.jpg',
     apple: '/images/log.jpg'
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
   }
 };
-
 
 async function getMessages(locale: string) {
   try {
