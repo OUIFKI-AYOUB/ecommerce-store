@@ -68,6 +68,13 @@ html, body {
   --chart-5: 340 75% 55%;
  }
 }
+* {
+  touch-action: manipulation;
+}
+
+.zoom-enabled {
+  touch-action: pan-x pan-y pinch-zoom;
+}
 
 
 @layer base {
