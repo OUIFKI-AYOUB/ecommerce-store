@@ -83,7 +83,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
       >
         {isInWishlist ? (
-          <Favorite className="text-red-500 text-[16px] md:text-[20px]" />
+          <Favorite className="text-red-500 text-[14px] md:text-[18px]" />
         ) : (
           <FavoriteBorderOutlined className="text-gray-600 dark:text-gray-300 text-[16px] md:text-[20px]" />
         )}
