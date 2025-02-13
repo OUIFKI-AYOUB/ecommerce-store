@@ -28,8 +28,8 @@ const HomePage = async () => {
   });
 
   return (
-    <div className="touch-pan-x touch-pan-y">
-      <Container>
+<div className="touch-auto">
+<Container>
         <MotionDiv 
           className="space-y-16 pb-10"
           initial={{ opacity: 0 }}
