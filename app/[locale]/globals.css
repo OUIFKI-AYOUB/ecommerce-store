@@ -2,14 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ensure full height and no overflow */
+/* Base styles and zoom functionality */
 html,
 body,
 :root {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow-x: hidden;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Enable zoom for home page */
+.min-h-screen {
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Apply base styles */
@@ -79,4 +89,16 @@ body,
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Mobile zoom support */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent zoom on non-home pages */
+:not(.min-h-screen) {
+  touch-action: pan-x pan-y;
 }

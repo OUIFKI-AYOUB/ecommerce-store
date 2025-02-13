@@ -28,14 +28,15 @@ const HomePage = async () => {
   });
 
   return (
-    <div className="touch-pan-x touch-pan-y">
-      <Container>
-        <MotionDiv 
-          className="space-y-16 pb-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+    <div className="min-h-screen touch-pan-x touch-pan-y">
+      <div className="min-w-screen">
+        <Container>
+          <MotionDiv 
+            className="space-y-16 pb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
           {billboards.length > 0 && (
             <MotionDiv
               initial={{ y: 50, opacity: 0 }}
@@ -108,6 +109,7 @@ const HomePage = async () => {
           )}
         </MotionDiv>
       </Container>
+    </div>
     </div>
   );
 }
