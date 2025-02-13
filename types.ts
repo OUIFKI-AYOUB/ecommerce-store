@@ -5,11 +5,20 @@ export interface Billboard {
     
 }
 
+
+
+export interface Comment {
+  id: string;
+
+  imageUrl: string;
+  
+}
+
+
 export interface Category {
-    id: string;
-    name: string;
-    billboard: Billboard;
-    
+  id: string;
+  name: string;
+  billboard?: Billboard; 
 }
 
 
@@ -43,21 +52,28 @@ export interface Size {
     updatedAt: Date;
     sizes: Size[];
     colors: Color[];
-    images: Image[];
+    media: Media[];
     categories: Category[];
     quantity: number | null;
+    isOnSale: boolean;  // Added this property
     colorSizeQuantities: ColorSizeQuantity[];
     isCompletelyOutOfStock: boolean;
     
   }
   
-  export interface Image {
+  export interface Media {
     id: string;
     url: string;
-    
-  }
-  
+    type: MediaType; 
+    productId: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
+export enum MediaType {
+    IMAGE = 'IMAGE',
+    VIDEO = 'VIDEO'
+}
   export interface ColorSizeQuantity {
     id: string;
     productId: string;
@@ -68,8 +84,8 @@ export interface Size {
     size?: Size;
 }
 
-  export interface CartItem extends Product {
-    quantity: number;
-    selectedSize?: Size;
-    selectedColor?: Color;
+export interface CartItem extends Product {
+  quantity: number;
+  selectedSize?: Size;
+  selectedColor?: Color;
 }

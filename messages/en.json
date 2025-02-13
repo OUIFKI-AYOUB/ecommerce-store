@@ -1,0 +1,166 @@
+{
+    "navigation": {
+      "home": "Home",
+      "newArrivals": "New Arrivals",
+      "shopCollection": "Shop Collection",
+       "allProducts": "All Products",
+       "products": " Products"
+    },
+    "common": {
+      "title": "Matjar leafifat",
+      "description": "Matjar leafifat"
+    },
+  
+    "product": {
+      "chooseSize": "Choose a Size",
+      "chooseColor": "Choose a Color",
+      "quantity": "Quantity",
+      "addToCart": "Add To Cart",
+      "productDescription": "Product Description",
+      "selectedSize": "Selected Size",
+      "selectedColor": "Selected Color",
+      "availableQuantity": "Available Quantity",
+      "none": "None",
+      "alerts": {
+        "selectSize": "Please select a size and a color before adding to cart",
+        "selectColor": "Please select a color before adding to cart",
+        "limitedStock": "Only {count} items available",
+        "addedToCart": "Item added to cart successfully!"
+      }
+    },
+    "product-card": {
+    "noImage": "No image available",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock"
+  },
+  "wishlist": {
+    "title": "Your Wishlist",
+    "noImage": "No image"
+  },
+  "comment": {
+    "comments": "Client Reviews"
+  
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "noItems": "No items added to Cart",
+    "orderSummary": "Order Summary",
+    "numberOfItems": "Number of items",
+    "item": "item",
+    "items": "items",
+    "orderTotal": "Order Total",
+    "paymentMethod": "Select Payment Method",
+    "payWithCard": "Pay with Card",
+    "cashOnDelivery": "Cash on Delivery",
+    "processing": "Processing...",
+    "emptyCart": "No items in cart",
+    "placeOrder": "Place Order (Cash on Delivery)",
+    "checkoutCard": "Checkout with Card",
+    "noImage": "No image",
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "total": "Total",
+    "stockLimit": "Only {count} items available.",
+    "toasts": {
+      "paymentCanceled": "Payment canceled",
+      "error": "Something went wrong. Please try again.",
+      "success": "Order placed successfully! You'll pay on delivery.",
+      "stockIssuesFound": "Stock Issues Found",
+      "productOutOfStock": "{name} is currently out of stock",
+      "insufficientStock": "{name} ({size}, {color}) has insufficient stock",
+      "pleaseAdjustCart": "Please adjust your cart before proceeding to checkout"
+    }
+  },
+"codForm": {
+    "title": "Cash on Delivery Details",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "city": "City",
+    "cityPlaceholder": "Enter your city",
+    "deliveryCost": "Delivery Cost",
+    "allCities": "All Cities (40 MAD)",
+    "address": "Shipping Address",
+    "addressPlaceholder": "Enter your shipping address",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "confirmOrder": "Confirm Order",
+    "processing": "Processing...",
+    "fillFields": "Please fill in all fields"
+},
+  "success": {
+    "card": {
+      "title": "Payment Successful!",
+      "subtitle": "Thank you for your purchase",
+      "continueButton": "Continue Shopping",
+      "steps": {
+        "payment": {
+          "title": "Payment Confirmed",
+          "description": "Your payment has been processed successfully"
+        },
+        "processing": {
+          "title": "Order Processing",
+          "description": "We're preparing your items for shipping"
+        },
+        "shipping": {
+          "title": "Shipping Soon",
+          "description": "Your order will be shipped within 24-48 hours"
+        }
+      }
+    },
+    "cod": {
+      "title": "Order Placed Successfully!",
+      "subtitle": "Thank you for shopping with us",
+      "continueButton": "Continue Shopping",
+      "steps": {
+        "processing": {
+          "title": "Order Processing",
+          "description": "Your order is being processed by our team"
+        },
+        "confirmation": {
+          "title": "Confirmation Call",
+          "description": "We'll call you to confirm delivery details"
+        },
+        "delivery": {
+          "title": "Delivery",
+          "description": "Pay cash when your order arrives"
+        }
+      }
+    }
+  },
+  "search": {
+    "title": "Search Results",
+    "description": "Search results for products",
+    "resultsFor": "Search Results for \"{query}\"",
+    "noResults": "No products found."
+  },
+  "filters": {
+    "button": "Filters",
+    "sizes": "Sizes",
+    "colors": "Colors",
+    "price": "Price",
+    "sort": "Sort",
+    "noResults": "No results found",
+    "category": {
+      "title": "Categories",
+      "all": "All Categories"
+    },
+   
+    "priceRange": {
+      "min": "Min",
+      "max": "Max",
+      "apply": "Apply",
+      "reset": "Reset"
+    },
+    "sortOptions": {
+      "default": "Sort by",
+      "priceLowToHigh": "Price, low to high",
+      "priceHighToLow": "Price, high to low",
+      "dateOldToNew": "Date, old to new",
+      "dateNewToOld": "Date, new to old"
+    }
+  }
+  }
+  

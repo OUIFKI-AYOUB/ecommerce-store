@@ -34,7 +34,7 @@ const SearchBar = () => {
         {/* Add the submit button */}
         <button
           type="submit"
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-cyan-500 text-white px-3 py-1 rounded"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-pink-500 text-white px-3 py-1 rounded"
         >
          <Search className="h-4 w-4" />
         </button>

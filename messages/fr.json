@@ -1,0 +1,163 @@
+{
+    "navigation": {
+      "home": "Accueil",
+      "newArrivals": "Nouveautés", 
+      "shopCollection": "Voir la Collection",
+       "allProducts": "Tous les produits",
+       "products": " Produits"
+    },
+    "common": {
+      "title": "Matjar leafifat",
+      "description": "Matjar leafifat"
+    },
+    "product": {
+    "chooseSize": "Choisir une taille",
+    "chooseColor": "Choisir une couleur",
+    "quantity": "Quantité",
+    "addToCart": "Ajouter au panier",
+    "productDescription": "Description du produit",
+    "selectedSize": "Taille sélectionnée",
+    "selectedColor": "Couleur sélectionnée",
+    "availableQuantity": "Quantité disponible",
+    "none": "Aucun",
+    "alerts": {
+      "selectSize": "Veuillez sélectionner une taille et une couleur avant d'ajouter au panier",
+      "selectColor": "Veuillez sélectionner une couleur avant d'ajouter au panier",
+      "limitedStock": "Seulement {count} articles disponibles",
+      "addedToCart": "Article ajouté au panier avec succès!"
+    }
+  },
+  "product-card": {
+    "noImage": "No image available",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock"
+  },
+  "wishlist": {
+    "title": "Votre Liste de Souhaits",
+    "noImage": "Pas d'image"
+  },
+  "comment": {
+    "comments": "Avis Clients"
+  
+  },
+  "cart": {
+    "title": "Panier d'achat",
+    "noItems": "Aucun article dans le panier",
+    "orderSummary": "Récapitulatif de la commande",
+    "numberOfItems": "Nombre d'articles",
+    "item": "article",
+    "items": "articles",
+    "orderTotal": "Total de la commande",
+    "paymentMethod": "Choisir le mode de paiement",
+    "payWithCard": "Payer par carte",
+    "cashOnDelivery": "Paiement à la livraison",
+    "processing": "Traitement en cours...",
+    "emptyCart": "Panier vide",
+    "placeOrder": "Commander (Paiement à la livraison)",
+    "checkoutCard": "Payer par carte",
+    "quantity": "Quantité",
+    "size": "Taille",
+    "color": "Couleur",
+    "noImage": "Pas d'image",
+    "total": "Total",
+    "stockLimit": "Seulement {count} articles disponibles.",
+    "toasts": {
+      "paymentCanceled": "Paiement annulé",
+      "error": "Une erreur est survenue. Veuillez réessayer.",
+      "success": "Commande passée avec succès! Vous paierez à la livraison."
+    }
+  },
+"codForm": {
+    "title": "Détails de la livraison",
+    "fullName": "Nom complet",
+    "fullNamePlaceholder": "Entrez votre nom complet",
+    "phone": "Numéro de téléphone",
+    "phonePlaceholder": "Entrez votre numéro de téléphone",
+    "city": "Ville",
+    "cityPlaceholder": "Entrez votre ville",
+    "deliveryCost": "Frais de livraison",
+    "allCities": "Toutes les villes (40 MAD)",
+    "address": "Adresse de livraison",
+    "addressPlaceholder": "Entrez votre adresse de livraison",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "confirmOrder": "Confirmer la commande",
+    "processing": "Traitement en cours...",
+    "fillFields": "Veuillez remplir tous les champs"
+},
+  "success": {
+    "card": {
+      "title": "Paiement réussi !",
+      "subtitle": "Merci pour votre achat",
+      "continueButton": "Continuer vos achats",
+      "steps": {
+        "payment": {
+          "title": "Paiement confirmé",
+          "description": "Votre paiement a été traité avec succès"
+        },
+        "processing": {
+          "title": "Commande en cours",
+          "description": "Nous préparons vos articles pour l'expédition"
+        },
+        "shipping": {
+          "title": "Expédition prochaine",
+          "description": "Votre commande sera expédiée sous 24-48 heures"
+        }
+      }
+    },
+    "cod": {
+      "title": "Commande passée avec succès!",
+      "subtitle": "Merci d'avoir fait vos achats chez nous",
+      "continueButton": "Continuer vos achats",
+      "steps": {
+        "processing": {
+          "title": "Traitement de la commande",
+          "description": "Votre commande est en cours de traitement par notre équipe"
+        },
+        "confirmation": {
+          "title": "Appel de confirmation",
+          "description": "Nous vous appellerons pour confirmer les détails de livraison"
+        },
+        "delivery": {
+          "title": "Livraison",
+          "description": "Payez en espèces à la réception de votre commande"
+        }
+      }
+    }
+  },
+  "search": {
+    "title": "Résultats de recherche",
+    "description": "Résultats de recherche pour les produits",
+    "resultsFor": "Résultats de recherche pour \"{query}\"",
+    "noResults": "Aucun produit trouvé."
+  },
+  "filters": {
+    "button": "Filtres",
+    "sizes": "Tailles",
+    "colors": "Couleurs",
+    "price": "Prix",
+    "noResults": "Aucun résultat trouvé",
+    "category": {
+      "title": "Catégories",
+      "all": "Toutes les catégories"
+    },
+    
+    "priceRange": {
+      "min": "Min",
+      "max": "Max",
+      "apply": "Appliquer",
+      "reset": "Réinitialiser"
+    },
+"sortOptions": {
+  "default": "Trier par",
+  "priceLowToHigh": "Prix, du moins au plus",
+  "priceHighToLow": "Prix,du plus au moins ",
+  "dateOldToNew": "Date, Ancien → Récent",
+  "dateNewToOld": "Date, Récent → Ancien",
+  "newest": "Plus récent"
+}
+  }
+
+  
+  }
+  

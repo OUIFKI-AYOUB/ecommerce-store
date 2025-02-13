@@ -39,25 +39,26 @@ const Footer = () => {
         </ul>
       </div>
 
-      <div className="flex-1 p-5 bg-gray-100">
-        <h3 className="text-xl font-semibold mb-7.5 p-2">Contact</h3>
-        {[
-          { Icon: Place, text: 'address' },
-          { Icon: Phone, text: '+7536462093' },
-          { Icon: Mail, text: 'jie@gmail.com' },
-        ].map(({ Icon, text }, index) => (
-          <div key={index} className="mb-5 flex items-center">
-            <Icon className="mr-5" />
+      <div className="flex-1 p-5 bg-gray-100 dark:bg-gray-800">
+    <h3 className="text-xl font-semibold mb-7.5 p-2 text-gray-900 dark:text-white">Contact</h3>
+    {[
+        { Icon: Place, text: 'address' },
+        { Icon: Phone, text: '+7536462093' },
+        { Icon: Mail, text: 'jie@gmail.com' },
+    ].map(({ Icon, text }, index) => (
+        <div key={index} className="mb-5 flex items-center text-gray-700 dark:text-gray-200">
+            <Icon className="mr-5 text-gray-600 dark:text-gray-300" />
             {text}
-          </div>
-        ))}
-        <Image
-          src="https://i.ibb.co/Qfvn4z6/payment.png"
-          alt="Payment methods"
-          width={200}
-          height={50}
-        />
-      </div>
+        </div>
+    ))}
+    <Image
+        src="https://i.ibb.co/Qfvn4z6/payment.png"
+        alt="Payment methods"
+        width={200}
+        height={50}
+        className="dark:opacity-90"
+    />
+</div>
     </footer>
   );
 };

@@ -1,4 +1,4 @@
-import { Product, Size, Color, ColorSizeQuantity } from "@/types";
+import { Product, Size, Color, ColorSizeQuantity, Media, MediaType } from "@/types";
 import qs from "query-string";
 
 const URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
@@ -8,8 +8,11 @@ interface Query {
   colorId?: string;
   sizeId?: string;
   isFeatured?: boolean;
-}
+  minPrice?: string;
+  maxPrice?: string;
+  sort?: string;
 
+}
 const isProductOutOfStock = (product: Product): boolean => {
   const hasSizes = product.sizes.length > 0;
   const hasColors = product.colors.length > 0;
@@ -86,15 +89,45 @@ const getProducts = async (query: Query): Promise<Product[]> => {
       colorId: query.colorId,
       sizeId: query.sizeId,
       isFeatured: query.isFeatured,
+      minPrice: query.minPrice,
+      maxPrice: query.maxPrice,
     },
   });
-
   const res = await fetch(url, {
     cache: 'no-store',
     next: { revalidate: 0 }
   });
 
   let products: Product[] = await res.json();
+
+// Apply price filter if minPrice or maxPrice is provided
+if (query.minPrice || query.maxPrice) {
+  products = products.filter((product) => {
+    const price = product.price;
+    const minPrice = query.minPrice ? parseFloat(query.minPrice) : 0;
+    const maxPrice = query.maxPrice ? parseFloat(query.maxPrice) : Infinity;
+    
+    return price >= minPrice && price <= maxPrice;
+  });
+}
+
+// Apply sorting
+if (query.sort) {
+  switch (query.sort) {
+    case 'price-low':
+      products.sort((a, b) => a.price - b.price);
+      break;
+    case 'price-high':
+      products.sort((a, b) => b.price - a.price);
+      break;
+    case 'date-old':
+      products.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+      break;
+    case 'date-new':
+      products.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      break;
+  }
+}
 
   // Process each product to determine stock status at all levels
   products = products.map(processProductStock);

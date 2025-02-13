@@ -4,33 +4,48 @@ import MainNav from "@/components/main-nav";
 import getCategories from "@/actions/get-categories";
 import NavbarActions from "@/components/navbar-actions";
 import SearchBar from "@/components/ui/search-bar";
-import { ThemeToggle } from "./theme-toggle";
+import MobileNav from "@/components/ui/mobile-nav";
+import MobileSearch from "@/components/ui/mobile-search";
+import Image from "next/image";
+import LanguageSwitcher from './language-switcher';
+import { useLocale } from 'next-intl';
 
+export const revalidate = 0;
 
-export const revalidate = 0
 const Navbar = async () => {
-    const categories = await getCategories()
-    return ( 
-        <div className="border-b">
-            <Container >
-            <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
-            <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2" >
-            <p className="font-bold text-xl">Store</p>
-            
-            </Link>
-            <MainNav data={categories} />
-            <div className="mr-auto flex items-center space-x-4">
-            <SearchBar />
-            <NavbarActions />
-            <ThemeToggle />
-            </div>
-            
-            </div>
-          
-            </Container>
+  const categories = await getCategories();
+  const locale = useLocale();
+  const messages = (await import(`../messages/${locale}.json`)).default;
 
+  return (
+    <div className="border-b fixed top-0 w-full bg-white dark:bg-black z-50">
+      <Container>
+        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
+          <MobileNav data={categories} />
+          <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
+            <Image
+              src="/images/mat.png"
+              alt="Logo"
+              width={180}
+              height={60}
+              className="h-16 w-auto"
+            />
+          </Link>
+          <div className="hidden lg:block">
+            <MainNav data={categories} messages={messages} locale={locale} />
+          </div>
+          <div className="hidden lg:block flex-1">
+            <SearchBar />
+          </div>
+          <div className="ml-auto flex items-center space-x-4">
+            <LanguageSwitcher />
+            <MobileSearch />
+            <NavbarActions />
+          </div>
         </div>
-     );
-}
- 
+      </Container>
+    </div>
+  );
+};
+
 export default Navbar;

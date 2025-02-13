@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Product, Size, Color } from "@/types";
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import useCart from "@/hooks/use-cart";
+import { useTranslations } from 'next-intl';
 
 interface InfoProps {
     data: Product;
@@ -19,9 +20,14 @@ const Info: React.FC<InfoProps> = ({ data }) => {
     const [quantity, setQuantity] = useState(1);
     const [message, setMessage] = useState<string | null>(null);
     const cart = useCart();
+    const t = useTranslations('product');
 
     const hasSizes = data.sizes.length > 0;
     const hasColors = data.colors.length > 0;
+
+
+    const [showCashOrderModal, setShowCashOrderModal] = useState(false);
+
 
     // Get total available quantity across all variants
     const getTotalQuantity = (): number => {
@@ -47,7 +53,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                 );
                 return colorQuantity?.quantity || 0;
             }
-            return data.colorSizeQuantities.reduce((total, csq) => 
+            return data.colorSizeQuantities.reduce((total, csq) =>
                 !csq.sizeId ? total + csq.quantity : total, 0);
         }
 
@@ -59,7 +65,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                 );
                 return sizeQuantity?.quantity || 0;
             }
-            return data.colorSizeQuantities.reduce((total, csq) => 
+            return data.colorSizeQuantities.reduce((total, csq) =>
                 !csq.colorId ? total + csq.quantity : total, 0);
         }
 
@@ -75,32 +81,29 @@ const Info: React.FC<InfoProps> = ({ data }) => {
     };
 
     const handleAddToCart = () => {
-        // Clear any existing messages
         setMessage(null);
-
-        // Check if product requires size selection
+    
         if (hasSizes && !selectedSize) {
-            setMessage("Please select a size before adding to cart");
+            setMessage(t('alerts.selectSize'));
             return;
         }
-
-        // Check if product requires color selection
+    
         if (hasColors && !selectedColor) {
-            setMessage("Please select a color before adding to cart");
+            setMessage(t('alerts.selectColor'));
             return;
         }
-
-        // Check if selected quantity is available
+    
         const availableQuantity = getAvailableQuantity();
         if (quantity > availableQuantity) {
-            setMessage(`Only ${availableQuantity} items available`);
+            setMessage(t('alerts.limitedStock', { count: availableQuantity }));
             return;
         }
-
-        // Add to cart if all checks pass
+    
         cart.addItem(data, quantity, selectedSize || undefined, selectedColor || undefined);
-        setMessage("Item added to cart successfully!");
+        setMessage(t('alerts.addedToCart'));
     };
+    
+
 
     // Helper function to check if product is completely out of stock
     const isCompletelyOutOfStock = (): boolean => {
@@ -113,23 +116,26 @@ const Info: React.FC<InfoProps> = ({ data }) => {
 
         return (
             <div className="mb-4">
-                <h3 className="text-sm font-semibold mb-2">Choose a {type === 'size' ? 'Size' : 'Color'}</h3>
+                <h3 className="text-sm font-semibold mb-2 dark:text-gray-200">
+                    {type === 'size' ? t('chooseSize') : t('chooseColor')}
+                </h3>
                 <div className={`flex ${type === 'size' ? 'flex-wrap gap-2' : 'space-x-2'}`}>
                     {options.map((option) => {
                         const isAvailable = type === 'size'
                             ? !option.isOutOfStock && getQuantityForOption(option, type) > 0
                             : !option.isOutOfStock && getQuantityForOption(option, type) > 0;
 
+
                         return (
                             <button
                                 key={option.id}
-                                className={`
+                                className={`transition-all duration-200 ease-in-out
                                     ${type === 'size'
                                         ? 'px-3 py-1 text-sm rounded-md'
                                         : 'w-8 h-8 rounded-full border-2'}
                                     ${selectedOption?.id === option.id
-                                        ? (type === 'size' ? 'bg-pink-500 text-white' : 'border-black')
-                                        : (type === 'size' ? 'bg-white text-pink-500 border border-pink-500' : 'border-gray-300')}
+                                        ? (type === 'size' ? 'bg-pink-500 text-white' : 'border-black dark:border-white scale-110 shadow-md shadow-pink-500/50')
+                                        : (type === 'size' ? 'bg-white dark:bg-gray-800 text-pink-500 dark:text-pink-400 border border-pink-500 dark:border-pink-400' : 'border-gray-300 dark:border-gray-600')}
                                     ${!isAvailable ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
                                 `}
                                 style={type === 'color' ? { backgroundColor: (option as Color).value } : {}}
@@ -145,7 +151,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                                 {type === 'size' ? (option as Size).name : null}
                                 {!isAvailable && type === 'color' && (
                                     <div className="relative w-full h-full flex items-center justify-center">
-                                        <div className="absolute w-[150%] h-0.5 bg-red-700 rotate-45"></div>
+                                        <div className="absolute w-[150%] h-0.5 bg-red-700 dark:bg-red-400 rotate-45"></div>
                                     </div>
                                 )}
                             </button>
@@ -181,20 +187,22 @@ const Info: React.FC<InfoProps> = ({ data }) => {
 
         return (
             <div className="flex items-center space-x-2 mb-4">
-                <h3 className="text-sm font-semibold">Quantity:</h3>
+                <h3 className="text-sm font-semibold dark:text-gray-200">
+                    {t('quantity')}
+                </h3>
                 <div className="flex items-center space-x-1">
                     <Button
                         size="sm"
                         variant="outline"
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                         disabled={quantity <= 1}
-                        className="focus:bg-pink-500 focus:text-white"
+                        className="focus:bg-pink-500 focus:text-white dark:border-gray-600 dark:text-gray-200"
                     >
                         <Minus size={16} />
                     </Button>
-                    <span className="text-sm font-semibold mx-2">{quantity}</span>
+                    <span className="text-sm font-semibold mx-2 dark:text-gray-200">{quantity}</span>
                     <Button
-                        className="focus:bg-pink-500 focus:text-white"
+                        className="focus:bg-pink-500 focus:text-white dark:border-gray-600 dark:text-gray-200"
                         size="sm"
                         variant="outline"
                         onClick={() => setQuantity(Math.min(availableQuantity, quantity + 1))}
@@ -210,15 +218,15 @@ const Info: React.FC<InfoProps> = ({ data }) => {
     return (
         <div className="space-y-4">
             <div>
-                <h1 className="text-2xl font-bold text-primary">{data.name}</h1>
+                <h1 className="text-2xl font-bold text-primary dark:text-gray-100">{data.name}</h1>
                 <div className="mt-2">
-                    <p className="text-xl text-gray-900">
+                    <p className="text-xl text-gray-900 dark:text-gray-100">
                         <Currency value={data?.price} />
                     </p>
                 </div>
             </div>
 
-            <hr className="border-gray-300" />
+            <hr className="border-gray-300 dark:border-gray-700" />
 
             {renderOptions(data.colors, selectedColor, setSelectedColor, 'color')}
             {renderOptions(data.sizes, selectedSize, setSelectedSize, 'size')}
@@ -228,36 +236,67 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                 <div className="relative inline-block">
                     <Button
                         size="sm"
-                        className="px-6 py-4 text-sm font-semibold text-white bg-black hover:bg-gray-800"
+                        className="px-6 py-4 text-sm font-semibold text-white bg-pink-600 
+    hover:bg-white hover:text-black 
+    dark:hover:bg-gray-800 dark:hover:text-white 
+    border border-pink-600 hover:border-black dark:hover:border-gray-600 
+    dark:bg-pink-700 dark:border-pink-700
+    transition-colors"
                         onClick={handleAddToCart}
                         disabled={isCompletelyOutOfStock()}
                     >
-                        Add To Cart
-                        <ShoppingCart size={16} className="ml-2" />
+                        {t('addToCart')}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 ml-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                            />
+                        </svg>
                     </Button>
-                    <span className="absolute -top-2 -right-2 h-4 w-4">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-4 w-4 bg-sky-500"></span>
-                    </span>
                 </div>
 
                 {message && (
-                    <Alert variant={message.includes("successfully") ? "default" : "destructive"}>
-                        <AlertDescription>{message}</AlertDescription>
-                    </Alert>
+    <Alert 
+        variant={message.includes(t('alerts.addedToCart')) ? "default" : "destructive"}
+        className="dark:bg-gray-800 dark:border-gray-700"
+    >
+        <AlertDescription className="dark:text-gray-200">
+            {message}
+        </AlertDescription>
+    </Alert>
+)}
+
+
+                <div className="text-xs text-gray-600 dark:text-gray-400">
+                    {hasSizes && (
+                        <p>{t('selectedSize')} {selectedSize?.name || t('none')}</p>
+                    )}
+                    {hasColors && (
+                        <p>{t('selectedColor')} {selectedColor?.name || t('none')}</p>
+                    )}
+                    <p>{t('availableQuantity')} {getAvailableQuantity()}</p>
+                </div>
+
+
+                {data.description && (
+                    <div className="mt-4">
+                        <h2 className="text-lg font-semibold mb-2 dark:text-gray-200">
+                            {t('productDescription')}
+                        </h2>
+                        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{data.description}</p>
+                    </div>
                 )}
-
-                <div className="text-xs text-gray-600">
-                    {hasSizes && <p>Selected Size: {selectedSize?.name || 'None'}</p>}
-                    {hasColors && <p>Selected Color: {selectedColor?.name || 'None'}</p>}
-                    <p>Available Quantity: {getAvailableQuantity()}</p>
-                </div>
-
-                <div className="mt-4">
-                    <h2 className="text-lg font-semibold mb-2">Product Description</h2>
-                    <p className="text-sm text-gray-700 leading-relaxed">{data.description}</p>
-                </div>
             </div>
+
+
         </div>
     );
 };

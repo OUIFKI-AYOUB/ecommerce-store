@@ -1,0 +1,162 @@
+{
+    "navigation": {
+      "home": "الرئيسية",
+      "newArrivals": " المنتجات الجديدة",
+      "shopCollection": "تسوق المجموعة",
+       "allProducts": "جميع المنتجات",
+       "products": " منتجات"
+    },
+    "common": {
+      "title": "متجر لفيفات",
+      "description": "متجر لفيفات"
+    },
+    "product": {
+    "chooseSize": "اختر المقاس",
+    "chooseColor": "اختر اللون",
+    "quantity": "الكمية",
+    "addToCart": "أضف إلى السلة",
+    "productDescription": "وصف المنتج",
+    "selectedSize": "المقاس المختار",
+    "selectedColor": "اللون المختار",
+    "availableQuantity": "الكمية المتوفرة",
+    "none": "لا شيء",
+    "alerts": {
+      "selectSize": "يرجى اختيار المقاس و اللون قبل الإضافة إلى السلة",
+      "selectColor": "يرجى اختيار اللون قبل الإضافة إلى السلة",
+      "limitedStock": "متوفر فقط {count} قطع",
+      "addedToCart": "تمت إضافة المنتج إلى السلة بنجاح!"
+    }
+  },
+  "product-card": {
+    "noImage": "لا توجد صورة متاحة",
+    "inStock": "متوفر",
+    "outOfStock": "نفذت الكمية"
+  },
+  "wishlist": {
+    "title": "قائمة رغباتك",
+    "noImage": "لا توجد صورة"
+  },
+  "comment": {
+    "comments": "آراء  المشترين" 
+  
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "noItems": "لا توجد منتجات في السلة",
+    "orderSummary": "ملخص الطلب",
+    "numberOfItems": "عدد المنتجات",
+    "item": "منتج",
+    "items": "منتجات",
+    "orderTotal": "إجمالي الطلب",
+    "paymentMethod": "اختر طريقة الدفع",
+    "payWithCard": "الدفع بالبطاقة",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "processing": "جاري المعالجة...",
+    "emptyCart": "السلة فارغة",
+    "placeOrder": "تأكيد الطلب (الدفع عند الاستلام)",
+    "checkoutCard": "الدفع بالبطاقة",
+    "noImage": "لا توجد صورة",
+    "size": "المقاس",
+    "color": "اللون",
+    "quantity": "الكمية",
+    "total": "المجموع",
+    "stockLimit": "متوفر فقط {count} قطع.",
+    "toasts": {
+      "paymentCanceled": "تم إلغاء عملية الدفع",
+      "error": "حدث خطأ. يرجى المحاولة مرة أخرى",
+      "success": "تم تأكيد طلبك بنجاح! سيتم الدفع عند الاستلام"
+    }
+  },
+  "codForm": {
+    "title": "تفاصيل الدفع عند الاستلام",
+    "fullName": "الاسم الكامل",
+    "fullNamePlaceholder": "أدخل اسمك الكامل",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "city": "المدينة",
+    "cityPlaceholder": "أدخل مدينتك",
+    "deliveryCost": "تكلفة التوصيل",
+    "allCities": "جميع المدن (40 درهم)",
+    "address": "عنوان التوصيل",
+    "addressPlaceholder": "أدخل عنوان التوصيل",
+    "subtotal": "المجموع الفرعي",
+    "total": "المجموع الكلي",
+    "confirmOrder": "تأكيد الطلب",
+    "processing": "جاري المعالجة...",
+    "fillFields": "يرجى ملء جميع الحقول"
+},
+  "success": {
+    "card": {
+      "title": "تمت عملية الدفع بنجاح!",
+      "subtitle": "شكراً لشرائك منتجاتنا",
+      "continueButton": "مواصلة التسوق",
+      "steps": {
+        "payment": {
+          "title": "تم تأكيد الدفع",
+          "description": "تمت معالجة عملية الدفع الخاصة بك بنجاح"
+        },
+        "processing": {
+          "title": "معالجة الطلب",
+          "description": "نحن نجهز منتجاتك للشحن"
+        },
+        "shipping": {
+          "title": "الشحن قريباً",
+          "description": "سيتم شحن طلبك خلال 24-48 ساعة"
+        }
+      }
+    },
+    "cod": {
+      "title": "تم تأكيد طلبك بنجاح!",
+      "subtitle": "شكراً لتسوقك معنا",
+      "continueButton": "مواصلة التسوق",
+      "steps": {
+        "processing": {
+          "title": "معالجة الطلب",
+          "description": "يتم معالجة طلبك من قبل فريقنا"
+        },
+        "confirmation": {
+          "title": "مكالمة التأكيد",
+          "description": "سنتصل بك لتأكيد تفاصيل التوصيل"
+        },
+        "delivery": {
+          "title": "التوصيل",
+          "description": "ادفع نقداً عند وصول طلبك"
+        }
+      }
+    }
+  },
+  "search": {
+    "title": "نتائج البحث",
+    "description": "نتائج البحث عن المنتجات",
+    "resultsFor": "نتائج البحث عن \"{query}\"",
+    "noResults": "لم يتم العثور على منتجات."
+  },
+  "filters": {
+    "button": "تصفية",
+    "sizes": "المقاسات",
+    "colors": "الألوان",
+    "price": "السعر",
+    "sort": "ترتيب",
+    "noResults": "لا توجد نتائج",
+    "category": {
+      "title": "الفئات",
+      "all": "جميع الفئات"
+    },
+    
+    "priceRange": {
+      "min": "حد أدنى",
+      "max": "حد أقصى",
+      "apply": "تطبيق",
+      "reset": "إعادة تعيين"
+    },
+    "sortOptions": {
+      "default": "رتب حسب",
+      "priceLowToHigh": "السعر: من الأقل إلى الأعلى",
+      "priceHighToLow": "السعر: من الأعلى إلى الأقل",
+      "dateOldToNew": "التاريخ: من الأقدم للأحدث",
+      "dateNewToOld": "التاريخ: من الأحدث للأقدم"
+    }
+  }
+  
+  }
+  

@@ -1,89 +1,170 @@
-"use client"
+"use client";
 
 import React, { useState } from 'react';
-import { Image as ImageType } from "@/types";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
-interface GalleryProps {
-    images: ImageType[]
+const MediaType = {
+  IMAGE: "IMAGE",
+  VIDEO: "VIDEO"
+} as const;
+
+type MediaType = typeof MediaType[keyof typeof MediaType];
+
+interface MediaItem {
+  id: string | number;
+  type: MediaType;
+  url: string;
 }
 
-const GalleryTab: React.FC<{ image: ImageType }> = ({ image }) => {
-    return (
-        <Tab className="relative flex aspect-square cursor-pointer items-center justify-center rounded-md bg-white">
-            {({ selected }) => (
-                <div className="aspect-square h-full w-full relative">
-                    <Image
-                        fill
-                        src={image.url}
-                        alt=""
-                        className="object-cover object-center"
-                    />
-                    <span className={cn(
-                        "absolute inset-0 rounded-md ring-2 ring-offset-2",
-                        selected ? "ring-black" : "ring-transparent"
-                    )} />
-                </div>
-            )}
-        </Tab>
-    );
+interface GalleryTabProps {
+  mediaItem: MediaItem;
+}
+
+interface GalleryProps {
+  media: MediaItem[];
+}
+
+const GalleryTab = ({ mediaItem }: GalleryTabProps) => {
+  return (
+    <Tab className="relative flex aspect-square cursor-pointer items-center justify-center rounded-md bg-white">
+      {({ selected }) => (
+        <div className="aspect-square h-full w-full relative">
+          {mediaItem.type === MediaType.IMAGE ? (
+            <Image
+              fill
+              src={mediaItem.url}
+              alt=""
+              className="object-cover object-center"
+            />
+          ) : (
+            <video
+              className="h-full w-full object-cover"
+              src={mediaItem.url}
+              controls={false}
+              muted
+              playsInline
+            />
+          )}
+          <span className={cn(
+            "absolute inset-0 rounded-md ring-2 ring-offset-2",
+            selected ? "ring-black" : "ring-transparent"
+          )} />
+        </div>
+      )}
+    </Tab>
+  );
 };
 
-const Gallery: React.FC<GalleryProps> = ({ images }) => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
+const Gallery = ({ media }: GalleryProps) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
-    const nextImage = () => {
-        setSelectedIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
+  const nextMedia = () => {
+    setSelectedIndex((prevIndex) => (prevIndex + 1) % media.length);
+  };
 
-    const prevImage = () => {
-        setSelectedIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
+  const prevMedia = () => {
+    setSelectedIndex((prevIndex) => (prevIndex - 1 + media.length) % media.length);
+  };
 
-    return (
-        <TabGroup as="div" className="flex flex-col" selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-            <div className="relative overflow-hidden">
-                <TabPanels className="aspect-square w-full">
-                    {images.map((image) => (
-                        <TabPanel key={image.id} className="absolute top-0 left-0 h-full w-full">
-                            <div className="aspect-square relative h-[95%] w-[95%] mx-auto sm:rounded-lg overflow-hidden">
-                                <Image
-                                    fill
-                                    src={image.url}
-                                    alt=""
-                                    className="object-cover object-center"
-                                />
-                            </div>
-                        </TabPanel>
-                    ))}
-                </TabPanels>
-                <div className="absolute inset-0 flex items-center justify-between p-4">
-                    <button
-                        onClick={prevImage}
-                        className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-                    <button
-                        onClick={nextImage}
-                        className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none"
-                    >
-                        <ChevronRight size={24} />
-                    </button>
+  const handleZoom = (imageUrl: string) => {
+    setZoomedImage(imageUrl);
+    setIsZoomed(true);
+  };
+
+  const closeZoom = () => {
+    setZoomedImage(null);
+    setIsZoomed(false);
+  };
+
+  return (
+    <>
+      <TabGroup as="div" className="flex flex-col" selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+        <div className="relative overflow-hidden">
+          <TabPanels className="aspect-square w-full">
+            {media.map((item) => (
+              <TabPanel key={item.id} className="absolute top-0 left-0 h-full w-full">
+                <div className="aspect-square relative h-[95%] w-[95%] mx-auto sm:rounded-lg overflow-hidden group">
+                  {item.type === MediaType.IMAGE ? (
+                    <>
+                      <Image
+                        fill
+                        src={item.url}
+                        alt=""
+                        className="object-cover object-center"
+                      />
+                      <button
+                        onClick={() => handleZoom(item.url)}
+                       className="absolute right-4 top-4 p-2 rounded-full bg-white/80 
+                        sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+                      >
+                        <ZoomIn size={20} className="text-black" />
+                      </button>
+                    </>
+                  ) : (
+                    <video
+                      className="object-contain w-full h-full"
+                      src={item.url}
+                      controls
+                      playsInline
+                      key={item.id}
+                    />
+                  )}
                 </div>
-            </div>
-            <TabList className="mx-auto mt-6 h-[95%] w-[95%] max-w-2xl lg:max-w-none">
-                <div className="grid grid-cols-4 gap-6">
-                    {images.map((image) => (
-                        <GalleryTab key={image.id} image={image} />
-                    ))}
-                </div>
-            </TabList>
-        </TabGroup>
-    );
-}
+              </TabPanel>
+            ))}
+          </TabPanels>
+          <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+            <button
+              onClick={prevMedia}
+              className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              type="button"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button
+              onClick={nextMedia}
+              className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              type="button"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </div>
+        <TabList className="mx-auto mt-6 h-[95%] w-[95%] max-w-2xl lg:max-w-none">
+          <div className="grid grid-cols-4 gap-6">
+            {media.map((item) => (
+              <GalleryTab key={item.id} mediaItem={item} />
+            ))}
+          </div>
+        </TabList>
+      </TabGroup>
+
+      {isZoomed && zoomedImage && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+          <button
+            onClick={closeZoom}
+            className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full"
+          >
+            <X size={24} />
+          </button>
+          <div className="relative w-[90vw] h-[90vh]">
+            <Image
+              src={zoomedImage}
+              alt="Zoomed Image"
+              fill
+              className="object-contain"
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
 
 export default Gallery;
