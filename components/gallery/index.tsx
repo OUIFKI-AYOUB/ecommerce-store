@@ -31,23 +31,25 @@ const GalleryTab = ({ mediaItem }: GalleryTabProps) => {
   return (
     <Tab className="relative flex aspect-square cursor-pointer items-center justify-center rounded-md bg-white">
       {({ selected }) => (
-        <div className="aspect-square h-full w-full relative">
-          {mediaItem.type === MediaType.IMAGE ? (
-            <Image
-              fill
-              src={mediaItem.url}
-              alt=""
-              className="object-cover object-center"
-            />
-          ) : (
-            <video
-              className="h-full w-full object-cover"
-              src={mediaItem.url}
-              controls={false}
-              muted
-              playsInline
-            />
-          )}
+        <div>
+          <span className="absolute h-full w-full aspect-square inset-0 overflow-hidden rounded-md">
+            {mediaItem.type === MediaType.IMAGE ? (
+              <Image
+                fill
+                src={mediaItem.url}
+                alt=""
+                className="object-cover object-center"
+              />
+            ) : (
+              <video
+                className="object-contain w-full h-full"
+                src={mediaItem.url}
+                controls={false}
+                muted
+                playsInline
+              />
+            )}
+          </span>
           <span className={cn(
             "absolute inset-0 rounded-md ring-2 ring-offset-2",
             selected ? "ring-black" : "ring-transparent"
@@ -74,12 +76,13 @@ const Gallery = ({ media }: GalleryProps) => {
   const handleZoom = (imageUrl: string) => {
     setZoomedImage(imageUrl);
     setIsZoomed(true);
+    document.body.style.overflow = 'hidden';
   };
 
-  const closeZoom = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent event bubbling
-    setZoomedImage(null);
+  const closeZoom = () => {
     setIsZoomed(false);
+    setZoomedImage(null);
+    document.body.style.overflow = 'unset';
   };
 
   return (
@@ -97,11 +100,13 @@ const Gallery = ({ media }: GalleryProps) => {
                         src={item.url}
                         alt=""
                         className="object-cover object-center"
+                        priority
                       />
                       <button
                         onClick={() => handleZoom(item.url)}
                         className="absolute right-4 top-4 p-2 rounded-full bg-white/80 
                           sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+                        style={{ touchAction: 'manipulation' }}
                       >
                         <ZoomIn size={20} className="text-black" />
                       </button>
@@ -119,23 +124,27 @@ const Gallery = ({ media }: GalleryProps) => {
               </TabPanel>
             ))}
           </TabPanels>
+          
           <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
             <button
               onClick={prevMedia}
-              className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              className="p-2 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              style={{ touchAction: 'manipulation' }}
               type="button"
             >
               <ChevronLeft size={24} />
             </button>
             <button
               onClick={nextMedia}
-              className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              className="p-2 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              style={{ touchAction: 'manipulation' }}
               type="button"
             >
               <ChevronRight size={24} />
             </button>
           </div>
         </div>
+
         <TabList className="mx-auto mt-6 h-[95%] w-[95%] max-w-2xl lg:max-w-none">
           <div className="grid grid-cols-4 gap-6">
             {media.map((item) => (
@@ -146,25 +155,30 @@ const Gallery = ({ media }: GalleryProps) => {
       </TabGroup>
 
       {isZoomed && zoomedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
-          onClick={closeZoom} // Close zoom when clicking outside the image
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center touch-none"
+          onClick={closeZoom}
         >
           <button
-            onClick={closeZoom}
-            className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full z-60"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeZoom();
+            }}
+            className="fixed top-4 right-4 text-white p-4 hover:bg-white/10 rounded-full z-[60]"
+            style={{ touchAction: 'manipulation' }}
           >
             <X size={24} />
           </button>
-          <div
+          <div 
             className="relative w-[90vw] h-[90vh]"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+            onClick={(e) => e.stopPropagation()}
           >
             <Image
               src={zoomedImage}
               alt="Zoomed Image"
               fill
               className="object-contain"
+              priority
             />
           </div>
         </div>
