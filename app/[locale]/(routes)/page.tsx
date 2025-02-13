@@ -31,12 +31,12 @@ const HomePage = async () => {
   
   return (
     <Container>
-    <MotionDiv 
-      className="space-y-16 pb-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+      <MotionDiv 
+        className="space-y-16 pb-10 zoom-enabled" // Added zoom-enabled here
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         {billboards.length > 0 && (
           <MotionDiv
             initial={{ y: 50, opacity: 0 }}
