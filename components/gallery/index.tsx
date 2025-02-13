@@ -76,7 +76,8 @@ const Gallery = ({ media }: GalleryProps) => {
     setIsZoomed(true);
   };
 
-  const closeZoom = () => {
+  const closeZoom = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event bubbling
     setZoomedImage(null);
     setIsZoomed(false);
   };
@@ -99,8 +100,8 @@ const Gallery = ({ media }: GalleryProps) => {
                       />
                       <button
                         onClick={() => handleZoom(item.url)}
-                       className="absolute right-4 top-4 p-2 rounded-full bg-white/80 
-                        sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+                        className="absolute right-4 top-4 p-2 rounded-full bg-white/80 
+                          sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                       >
                         <ZoomIn size={20} className="text-black" />
                       </button>
@@ -145,14 +146,20 @@ const Gallery = ({ media }: GalleryProps) => {
       </TabGroup>
 
       {isZoomed && zoomedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          onClick={closeZoom} // Close zoom when clicking outside the image
+        >
           <button
             onClick={closeZoom}
-            className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full"
+            className="absolute top-4 right-4 text-white p-2 hover:bg-white/10 rounded-full z-60"
           >
             <X size={24} />
           </button>
-          <div className="relative w-[90vw] h-[90vh]">
+          <div
+            className="relative w-[90vw] h-[90vh]"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image
+          >
             <Image
               src={zoomedImage}
               alt="Zoomed Image"
@@ -165,6 +172,5 @@ const Gallery = ({ media }: GalleryProps) => {
     </>
   );
 };
-
 
 export default Gallery;
