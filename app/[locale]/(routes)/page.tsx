@@ -27,8 +27,6 @@ const HomePage = async () => {
     return productDate >= thirtyDaysAgo;
   });
 
-
-  
   return (
     <div className="touch-pan-x touch-pan-y">
       <Container>
@@ -37,81 +35,80 @@ const HomePage = async () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          style={{ touchAction: 'manipulation pan-x pan-y pinch-zoom' }}
         >
-        {billboards.length > 0 && (
-          <MotionDiv
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <Slider billboards={billboards} />
-          </MotionDiv>
-        )}
-
-        
-        <MotionDiv 
-          className="py-8"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold">{t('newArrivals')}</h2>
-            <Link 
-              href="/new-arrivals"
-              className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
-            >
-               {t('shopCollection')} →
-            </Link>
-          </div>
-          <ProductSlider products={newProducts} />
-        </MotionDiv>
-
-        {categories
-          .filter(category => 
-            products.some(product => 
-              product.categories.some(c => c.id === category.id)
-            )
-          )
-          .map((category, index) => (
-            <MotionDiv 
-              key={category.id} 
-              className="py-8"
+          {billboards.length > 0 && (
+            <MotionDiv
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.5 }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold">{category.name}</h2>
-                <Link 
-                  href={`/category/${category.id}`}
-                  className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
-                >
-                 {t('shopCollection')} →
-                </Link>
-              </div>
-              <ProductSlider 
-                products={products.filter(p => p.categories.some(c => c.id === category.id))}
-              />
+              <Slider billboards={billboards} />
             </MotionDiv>
-          ))}
+          )}
 
-        {comments.length > 0 && (
-          <MotionDiv
+          <MotionDiv 
+            className="py-8"
             initial={{ y: 50, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <CommentsSection comments={comments} />
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold">{t('newArrivals')}</h2>
+              <Link 
+                href="/new-arrivals"
+                className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
+              >
+                {t('shopCollection')} →
+              </Link>
+            </div>
+            <ProductSlider products={newProducts} />
           </MotionDiv>
-        )}
-      </MotionDiv>
-    </Container>
+
+          {categories
+            .filter(category => 
+              products.some(product => 
+                product.categories.some(c => c.id === category.id)
+              )
+            )
+            .map((category, index) => (
+              <MotionDiv 
+                key={category.id} 
+                className="py-8"
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold">{category.name}</h2>
+                  <Link 
+                    href={`/category/${category.id}`}
+                    className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
+                  >
+                    {t('shopCollection')} →
+                  </Link>
+                </div>
+                <ProductSlider 
+                  products={products.filter(p => p.categories.some(c => c.id === category.id))}
+                />
+              </MotionDiv>
+            ))}
+
+          {comments.length > 0 && (
+            <MotionDiv
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <CommentsSection comments={comments} />
+            </MotionDiv>
+          )}
+        </MotionDiv>
+      </Container>
+    </div>
   );
 }
 
