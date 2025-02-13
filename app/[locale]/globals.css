@@ -2,14 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, :root {
+  height: 100%;
+}
+
 html, body {
   overflow-x: hidden;
   position: relative;
   width: 100%;
 }
 
-:root {
- height: 100%;
+/* Touch and zoom controls */
+* {
+  touch-action: manipulation;
+}
+
+.zoom-enabled {
+  touch-action: manipulation pan-x pan-y pinch-zoom !important;
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -68,13 +79,7 @@ html, body {
   --chart-5: 340 75% 55%;
  }
 }
-* {
-  touch-action: manipulation;
-}
 
-.zoom-enabled {
-  touch-action: pan-x pan-y pinch-zoom;
-}
 
 
 @layer base {
