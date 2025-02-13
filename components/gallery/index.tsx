@@ -171,7 +171,7 @@ const Gallery = ({ media }: GalleryProps) => {
   className="fixed top-4 right-4 text-white p-4 hover:bg-white/10 rounded-full z-[60]"
   style={{ touchAction: 'manipulation' }}
 >
-<X size={24} />
+<X size={24}  className='m-[30px] md:m-[10px] '/>
   
 </button>
           <div 

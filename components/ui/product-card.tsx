@@ -69,7 +69,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
     }
   };
 
-  return (
+return (
     <div 
       onClick={handleClick} 
       className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300 hover:bg-pink-300 dark:hover:bg-indigo-500"
@@ -80,12 +80,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           <div className='absolute top-0 left-0 z-10'>
             <button
               onClick={toggleWishlist}
-              className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
+              className="rounded-full  flex justify-center items-center m-[2px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
             >
               {isInWishlist ? (
                 <Favorite className="w-4 h-4 md:w-5 md:h-5 text-red-500" />
               ) : (
-                <FavoriteBorderOutlined className="w-4 h-4 md:w-5 md:h-5 text-gray-600 dark:text-gray-300" />
+                <FavoriteBorderOutlined className="w-4 h-4 md:w-5 md:h-5 text-gray-900 dark:text-gray-900" />
               )}
             </button>
           </div>
