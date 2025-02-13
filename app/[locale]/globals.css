@@ -14,6 +14,7 @@ body,
   -webkit-overflow-scrolling: touch;
 }
 
+
 /* Enable zoom for home page */
 .min-h-screen {
   touch-action: manipulation;
