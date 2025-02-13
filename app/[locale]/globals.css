@@ -17,14 +17,13 @@ html, body {
 
 /* Enhanced Touch Controls */
 * {
-  touch-action: manipulation pan-x pan-y pinch-zoom;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: text;
   user-select: text;
 }
 
 body {
-  touch-action: pan-x pan-y pinch-zoom;
+  touch-action: pan-x pan-y;
 }
 
 /* Theme Configuration */
