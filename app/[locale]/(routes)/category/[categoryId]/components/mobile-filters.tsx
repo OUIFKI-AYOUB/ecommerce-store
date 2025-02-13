@@ -29,7 +29,7 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
     <>
     <Button 
   onClick={onOpen} 
-  className="flex items-center gap-x-2 lg:hidden bg-white dark:bg-gray-800 text-black dark:text-white border dark:border-gray-700 hover:text-current
+  className="flex items-center gap-x-2 lg:hidden bg-white dark:bg-gray-800 text-black dark:text-white border dark:border-gray-700
  "
 >
 {t('button')}
