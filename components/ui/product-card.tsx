@@ -4,7 +4,7 @@ import { FavoriteBorderOutlined, Favorite, ShoppingCartOutlined } from '@mui/ico
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Product, MediaType } from "@/types";
-import { Expand, ShoppingCart } from "lucide-react";
+import { Expand, ShoppingCart,Heart ,HeartOff } from "lucide-react";
 import Currency from "@/components/ui/currency";
 import { MouseEventHandler } from "react";
 import usePreviewModal from "@/hooks/use-preview-modal";
@@ -70,88 +70,76 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   };
 
   return (
-<div 
-  onClick={handleClick} 
-  className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-4 transition-colors duration-300 hover:bg-pink-300 dark:hover:bg-indigo-500"
->      
-  <div className="aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
-    {/* Wishlist button - Moved to top level of image container */}
-    <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition   ">
-    <div className='absolute top-0 left-0 z-10'>
-      <button
-        onClick={toggleWishlist}
-        className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
-      >
-        {isInWishlist ? (
-          <Favorite className="text-red-500 text-[14px] md:text-[18px]" />
-        ) : (
-          <FavoriteBorderOutlined className="text-gray-600 dark:text-gray-300 text-[16px] md:text-[20px]" />
-        )}
-      </button>
-    </div>
-    </div>
-       
-       
+    <div 
+      onClick={handleClick} 
+      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300 hover:bg-pink-300 dark:hover:bg-indigo-500"
+    >      
+      <div className="aspect-[4/5] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
+        {/* Wishlist button */}
+        <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
+          <div className='absolute top-0 left-0 z-10'>
+            <button
+              onClick={toggleWishlist}
+              className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
+            >
+              {isInWishlist ? (
+                <Favorite className="w-4 h-4 md:w-5 md:h-5 text-red-500" />
+              ) : (
+                <FavoriteBorderOutlined className="w-4 h-4 md:w-5 md:h-5 text-gray-600 dark:text-gray-300" />
+              )}
+            </button>
+          </div>
+        </div>
+        
         {firstImage ? (
           <Image
             src={firstImage.url}
             alt={data.name}
             fill
-            className="aspect-square object-cover rounded-md"
+            className="aspect-[4/5] sm:aspect-square object-cover rounded-md"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             {t('noImage')}
           </div>
         )}
+
+        {/* Preview button */}
         <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition absolute w-full px-2 md:px-6 bottom-2 md:bottom-5">
           <div className="flex gap-x-2 md:gap-x-6 justify-center">
-
-
             <button
               onClick={onPreview}
               className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
             >
               <Expand size={16} className="text-gray-600 dark:text-gray-300 md:text-[20px]" />
             </button>
-
-
-        
           </div>
         </div>
-
-      </div>
-      {/* Description */}
-      <div>
-        <p className="font-semibold text-lg dark:text-gray-100">{data.name}</p>
-        <p className="text-sm text-gray-500 dark:text-gray-300">{data.categories[0]?.name}</p>
       </div>
 
-      {/* Price & Stock */}
-      <div className="flex items-center justify-between">
-  <Currency value={data.price} />
-  {data.colors.length > 0 || data.sizes.length > 0 ? (
-    <span className={`text-sm font-semibold ${
-      data.colorSizeQuantities?.some(variant => variant.quantity > 0)
-        ? 'text-green-500'
-        : 'text-red-500'
-    }`}>
-      {data.colorSizeQuantities?.some(variant => variant.quantity > 0)
-        ?  t('inStock')
-        :  t('outOfStock')}
-    </span>
-  ) : (
-    <span className={`text-sm font-semibold ${
-      (data.quantity ?? 0) > 0 ? 'text-green-500' : 'text-red-500'
-    }`}>
-      {(data.quantity ?? 0) > 0 ? t('inStock') : t('outOfStock')}
-    </span>
-  )}
-</div>
+      {/* Description - Reduced spacing */}
+      <div className="space-y-1">
+        <p className="font-semibold text-sm sm:text-lg dark:text-gray-100 line-clamp-1">{data.name}</p>
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 line-clamp-1">{data.categories[0]?.name}</p>
+      </div>
 
+      {/* Price & Stock - Compact version */}
+      <div className="flex items-center justify-between pt-1">
+        <Currency value={data.price} />
+        <span className={`text-xs sm:text-sm font-semibold ${
+          data.colorSizeQuantities?.some(variant => variant.quantity > 0) || (data.quantity ?? 0) > 0
+            ? 'text-green-500'
+            : 'text-red-500'
+        }`}>
+          {data.colorSizeQuantities?.some(variant => variant.quantity > 0) || (data.quantity ?? 0) > 0
+            ? t('inStock')
+            : t('outOfStock')}
+        </span>
+      </div>
     </div>
   );
 };
+
 
 
 export default ProductCard;

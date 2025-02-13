@@ -2,11 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 /* Base Layout */
 html, body, :root {
   height: 100%;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: auto;
+=======
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+:root {
+ height: 100%;
+>>>>>>> 4f622d2 (newa)
 }
 
 html, body {

@@ -14,7 +14,6 @@ import { useTranslations } from 'next-intl';
 const CartPage = () => {
 
 
-
   const [isMounted, setIsMounted] = useState(false)
   const cart = useCart()
   const t = useTranslations('cart');
