@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 html, body {
-  overflow-x: auto;
   width: 100%;
-  touch-action: manipulation; /* Permet le pinch-to-zoom */
+  height: 100%;
+  overflow-x: hidden; /* Prevents horizontal scroll */
+  touch-action: manipulation; /* Allows pinch-to-zoom */
 }
 
 
@@ -78,4 +79,8 @@ html, body {
   body {
     @apply bg-background text-foreground;
  }
+}
+
+* {
+  box-sizing: border-box; /* Ensures elements are sized correctly without causing overflow */
 }
