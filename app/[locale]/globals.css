@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 html, body {
-  max-width: 100vw;
-  touch-action: manipulation;
+  overflow-x: auto;
+  width: 100%;
+  touch-action: manipulation; /* Permet le pinch-to-zoom */
 }
 
 
