@@ -24,8 +24,8 @@ interface IconButtonProps {
 const IconButton: React.FC<IconButtonProps> = ({ onClick, icon }) => (
   <button
     onClick={onClick}
-    className="rounded-full flex items-center justify-center bg-white p-2 active:scale-110 transition"
-    >
+className="rounded-full flex items-center justify-center bg-white p-2 active:scale-110 transition"
+  >
     {icon}
   </button>
 );
