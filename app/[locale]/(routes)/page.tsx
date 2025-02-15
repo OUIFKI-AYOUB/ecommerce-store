@@ -29,7 +29,7 @@ const HomePage = async () => {
 
   return (
 <div className="touch-auto ">
-<Container className=".problematic-element">
+<Container >
         <MotionDiv 
           className="space-y-16 pb-10"
           initial={{ opacity: 0 }}

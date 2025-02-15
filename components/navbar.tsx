@@ -27,7 +27,7 @@ const Navbar = async () => {
             <MobileSearch />
           </div>
 
-       <Link href="/" className="absolute left-1/2 transform -translate-x-1/2">
+          <Link href="/" className="lg:static lg:transform-none lg:left-0 absolute left-1/2 transform -translate-x-1/2">
           <Image
               src="/images/mat.png"
               alt="Logo"
