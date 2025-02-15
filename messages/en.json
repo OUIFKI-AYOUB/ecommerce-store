@@ -137,6 +137,14 @@
       }
     }
   },
+  
+  "toasta": {
+    "quantityUpdated": "Item quantity updated in cart.",
+    " addedToCart;": "Item added to cart."
+  
+  
+  },
+
   "search": {
     "title": "Search Results",
     "description": "Search results for products",

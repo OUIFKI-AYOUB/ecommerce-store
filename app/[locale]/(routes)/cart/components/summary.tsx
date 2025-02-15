@@ -12,7 +12,7 @@ import FormCod from "./form-cod";
 import { useTranslations } from 'next-intl';
 
 const Summary = () => {
-    const [paymentMethod, setPaymentMethod] = useState<'CARD' | 'COD'>('CARD');
+    const [paymentMethod, setPaymentMethod] = useState<'CARD' | 'COD'>('COD');
     const [showCodForm, setShowCodForm] = useState(false);
     const searchParams = useSearchParams();
     const items = useCart((state) => state.items);
@@ -137,6 +137,20 @@ const Summary = () => {
                     <div className="flex flex-col space-y-2">
                         <label className="text-sm font-medium">{t('paymentMethod')}:</label>
                         <div className="flex space-x-4">
+
+                        <label className="flex items-center gap-2 mb-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm"
+                            >
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="COD"
+                                    checked={paymentMethod === 'COD'}
+                                    onChange={(e) => setPaymentMethod(e.target.value as 'CARD' | 'COD')}
+                                    className="mr-2"
+                                />
+                                {t('cashOnDelivery')}
+                            </label>
+
                             <label className="flex items-center gap-2 mb-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm"
                             >
                                 <input
@@ -150,18 +164,7 @@ const Summary = () => {
                                 {t('payWithCard')}
                             </label>
 
-                            <label className="flex items-center gap-2 mb-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm"
-                            >
-                                <input
-                                    type="radio"
-                                    name="paymentMethod"
-                                    value="COD"
-                                    checked={paymentMethod === 'COD'}
-                                    onChange={(e) => setPaymentMethod(e.target.value as 'CARD' | 'COD')}
-                                    className="mr-2"
-                                />
-                                {t('cashOnDelivery')}
-                            </label>
+
                         </div>
                     </div>
                 </div>

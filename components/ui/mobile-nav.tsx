@@ -75,7 +75,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
           {mainRoutes.map((route) => (
             <div
               key={route.id}
-              className="py-3 px-4 text-sm font-medium hover:bg-sky-300 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors"
+              className="py-3 px-4 text-sm font-medium hover:bg-pink-600 dark:hover:bg-pink-600 rounded-lg cursor-pointer transition-colors"
               onClick={() => onNavigate(route.path)}
             >
               {route.name}
@@ -89,7 +89,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
           {data.map((category) => (
             <div
               key={category.id}
-              className="py-3 px-4 text-sm font-medium hover:bg-sky-300 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-colors"
+              className="py-3 px-4 text-sm font-medium hover:bg-pink-600 dark:hover:bg-pink-600 rounded-lg cursor-pointer transition-colors"
               onClick={() => onNavigate(`/category/${category.id}`)}
             >
               {category.name}

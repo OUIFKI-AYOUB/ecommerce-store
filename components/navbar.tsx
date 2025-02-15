@@ -21,9 +21,14 @@ const Navbar = async () => {
     <div className="border-b fixed top-0 w-full bg-white dark:bg-black z-50">
       <Container>
         <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
-          <MobileNav data={categories} />
-          <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
-            <Image
+          <div className="lg:hidden flex items-center space-x-2">
+            <MobileNav data={categories} />
+            <LanguageSwitcher />
+            <MobileSearch />
+          </div>
+
+       <Link href="/" className="absolute left-1/2 transform -translate-x-1/2">
+          <Image
               src="/images/mat.png"
               alt="Logo"
               width={180}
@@ -31,15 +36,19 @@ const Navbar = async () => {
               className="h-16 w-auto"
             />
           </Link>
+
           <div className="hidden lg:block">
             <MainNav data={categories} messages={messages} locale={locale} />
           </div>
+
           <div className="hidden lg:block flex-1">
             <SearchBar />
           </div>
-          <div className="ml-auto flex items-center space-x-4">
-            <LanguageSwitcher />
-            <MobileSearch />
+
+          <div className="flex items-center space-x-4 ml-auto">
+            <div className="hidden lg:block">
+              <LanguageSwitcher />
+            </div>
             <NavbarActions />
           </div>
         </div>
@@ -47,5 +56,6 @@ const Navbar = async () => {
     </div>
   );
 };
+
 
 export default Navbar;
