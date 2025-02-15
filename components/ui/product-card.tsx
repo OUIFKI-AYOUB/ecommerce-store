@@ -24,8 +24,8 @@ interface IconButtonProps {
 const IconButton: React.FC<IconButtonProps> = ({ onClick, icon }) => (
   <button
     onClick={onClick}
-    className="rounded-full flex items-center justify-center bg-white p-2 hover:scale-110 transition"
-  >
+    className="rounded-full flex items-center justify-center bg-white p-2 active:scale-110 transition"
+    >
     {icon}
   </button>
 );
@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 return (
     <div 
       onClick={handleClick} 
-      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300 sm:hover:bg-pink-300 sm:dark:hover:bg-indigo-500 zoom-container"
+      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-300  sm:dark:hover:bg-indigo-500"
     >      
       <div className="aspect-[4/5] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
         {/* Wishlist button */}

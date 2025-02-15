@@ -1,14 +1,14 @@
 interface ContainerProps {
     children: React.ReactNode;
-    className?: string;
+    className?: string; // Add this line
 }
 
 const Container: React.FC<ContainerProps> = ({
     children,
-    className
+    className // Retrieve the className
 }) => {
     return (
-        <div className={`mx-auto max-w-7xl touch-pan-x touch-pan-y ${className || ''}`}>
+        <div className={`mx-auto max-w-7xl zoom-enabled ${className || ''}`}>
             {children}
         </div>
     )
