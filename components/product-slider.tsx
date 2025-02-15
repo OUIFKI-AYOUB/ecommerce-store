@@ -81,17 +81,17 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
 
       <button
         onClick={prevSlide}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="absolute left-2 top-1/2 -translate-y-1/2  shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         disabled={currentIndex === 0}
       >
-        <ChevronLeft size={24} className="text-gray-800 dark:text-gray-200" />
+        <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600 " />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="absolute right-2 top-1/2 -translate-y-1/2  shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         disabled={currentIndex === products.length - 1}
       >
-        <ChevronRight size={24} className="text-gray-800 dark:text-gray-200" />
+        <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
       </button>
     </div>
   );
