@@ -19,8 +19,8 @@ const Slider: React.FC<SliderProps> = ({ billboards }) => {
   }, [billboards.length]);
 
   return (
-    <div className="relative overflow-hidden">
-      <div
+<div className="relative overflow-hidden w-full">
+<div
         className="flex transition-transform duration-1000 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >

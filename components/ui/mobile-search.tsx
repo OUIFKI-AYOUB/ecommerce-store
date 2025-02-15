@@ -41,7 +41,7 @@ const MobileSearch = () => {
       ) : (
         <form 
           onSubmit={onSubmit}
-          className="absolute right-0 top-0 w-full max-w p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg z-50"
+          className="absolute right-0 top-0 w-full max-w p-4 bg-white dark:bg-gray-900 shadow-lg rounded-lg z-50"
         >
           <div className="flex items-center gap-2">
             <input

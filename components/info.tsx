@@ -266,10 +266,19 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                 {message && (
     <Alert 
         variant={message.includes(t('alerts.addedToCart')) ? "default" : "destructive"}
-        className="dark:bg-gray-800 dark:border-gray-700"
+        className={`dark:bg-gray-800 dark:border-gray-700 ${
+            message === t('alerts.selectSize') || message === t('alerts.selectColor')
+                ? 'dark:text-red-400'
+                : ''
+        }`}
     >
-        <AlertDescription className="dark:text-gray-200">
-            {message}
+<AlertDescription 
+            className={`${
+                (message === t('alerts.selectSize') || message === t('alerts.selectColor'))
+                ? 'dark:text-red-400 text-red-600'
+                : 'dark:text-gray-200'
+            }`}
+        >            {message}
         </AlertDescription>
     </Alert>
 )}

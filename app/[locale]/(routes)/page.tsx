@@ -28,9 +28,9 @@ const HomePage = async () => {
   });
 
   return (
-<div className="touch-auto overflow-hidden overscroll-none">
-<Container className="overflow-x-hidden">
-<MotionDiv 
+<div className="touch-auto ">
+<Container className=".problematic-element">
+        <MotionDiv 
           className="space-y-16 pb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
