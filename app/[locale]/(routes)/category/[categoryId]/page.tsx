@@ -67,7 +67,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
     <Container>
       <div className="space-y-4 pb-10 dark:bg-gray-900">
         <Billboard data={category.billboard || null} />
-        <div className="mt-4 dark:bg-gray-900"> 
+        <div className="pt-6 dark:bg-gray-900"> 
           <h2 className="text-lg font-medium text-center justify-center">
             {products.length} {t('products')}
           </h2>

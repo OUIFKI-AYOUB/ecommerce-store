@@ -90,6 +90,13 @@
     "processing": "Processing...",
     "fillFields": "Please fill in all fields"
 },
+
+"mobile-nav": {
+    "Home": "Home",
+    "AllProducts": "All Products",
+    "NewArrivals": "New Arrivals"
+},
+
   "success": {
     "card": {
       "title": "Payment Successful!",

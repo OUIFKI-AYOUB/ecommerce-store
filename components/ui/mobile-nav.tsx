@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { Category } from "@/types";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface MobileNavProps {
   data: Category[];
@@ -13,15 +14,28 @@ interface MobileNavProps {
 const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const t = useTranslations('mobile-nav');
+
 
   const mainRoutes = [
     {
       id: 'home',
-      name: 'Home',
+      name: t('Home'),
       path: '/'
+    },
+    {
+      id: 'all-products',
+      name: t('AllProducts'),
+      path: '/all-products'
+    },
+    {
+      id: 'new-arrivals',
+      name: t('NewArrivals'),
+      path: '/new-arrivals'
     },
   
   ];
+  
 
   const onNavigate = (path: string) => {
     router.push(path);

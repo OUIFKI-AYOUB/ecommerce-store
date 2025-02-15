@@ -32,6 +32,12 @@
     "inStock": "In Stock",
     "outOfStock": "Out of Stock"
   },
+  "mobile-nav": {
+    "Home": "Accueil",
+    "AllProducts": "Tous les produits",
+    "NewArrivals": "Nouveautés"
+},
+
   "wishlist": {
     "title": "Votre Liste de Souhaits",
     "noImage": "Pas d'image"
