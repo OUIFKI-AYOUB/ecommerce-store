@@ -124,9 +124,9 @@ return (
       </div>
 
       {/* Price & Stock - Compact version */}
-      <div className="flex items-center justify-between pt-1">
+      <div className="flex items-center justify-between ">
         <Currency value={data.price} />
-        <span className={`text-xs sm:text-sm font-semibold ${
+        <span className={`text-[11.5px] sm:text-sm font-semibold ${
           data.colorSizeQuantities?.some(variant => variant.quantity > 0) || (data.quantity ?? 0) > 0
             ? 'text-green-500'
             : 'text-red-500'

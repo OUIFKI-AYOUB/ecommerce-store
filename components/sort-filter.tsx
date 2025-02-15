@@ -42,7 +42,7 @@ const SortFilter = () => {
     <div className="relative">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-sm md:text-base border rounded-md bg-white dark:bg-gray-800 dark:text-white min-w-[130px] md:min-w-[200px] flex justify-between items-center"
+        className="p-2 text-sm md:text-base border rounded-md bg-white dark:bg-gray-800 dark:text-white min-w-[150px] md:min-w-[200px] flex justify-between items-center"
       >
         <span>{currentLabel}</span>
         <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

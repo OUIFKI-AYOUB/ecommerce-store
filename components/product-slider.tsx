@@ -10,11 +10,11 @@ interface ProductSliderProps {
   products: Product[];
 }
 
+
 const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [translateX, setTranslateX] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const handleTouchStart = (e: TouchEvent) => {
@@ -23,49 +23,41 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   };
 
   const handleTouchMove = (e: TouchEvent) => {
-    if (!isDragging || !sliderRef.current) return;
-
+    if (!isDragging) return;
+    
     const currentX = e.touches[0].clientX;
     const diff = startX - currentX;
-    setTranslateX(-currentIndex * 100 + (diff / sliderRef.current.offsetWidth) * 100);
+
+    if (Math.abs(diff) > 150) {
+      if (diff > 0 && currentIndex < products.length - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else if (diff < 0 && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
+      setIsDragging(false);
+    }
   };
 
   const handleTouchEnd = () => {
-    if (!sliderRef.current) return;
-
-    const threshold = 0.2; // 20% of the slider width
-    const direction = translateX > 0 ? -1 : 1;
-
-    if (Math.abs(translateX) > threshold * 100) {
-      if (direction === 1 && currentIndex < products.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
-      } else if (direction === -1 && currentIndex > 0) {
-        setCurrentIndex((prev) => prev - 1);
-      }
-    }
-
-    setTranslateX(-currentIndex * 100);
     setIsDragging(false);
   };
 
   const nextSlide = () => {
     if (currentIndex < products.length - 1) {
-      setCurrentIndex((prev) => prev + 1);
-      setTranslateX(-(currentIndex + 1) * 100);
+      setCurrentIndex(prev => prev + 1);
     }
   };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-      setTranslateX(-(currentIndex - 1) * 100);
+      setCurrentIndex(prev => prev - 1);
     }
   };
 
   return (
     <div className="relative">
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
-      <div
+      <div 
         className="overflow-hidden touch-pan-y"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
@@ -73,13 +65,13 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="flex transition-transform duration-300 ease-out"
-          style={{ transform: `translateX(${translateX}%)` }}
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentIndex * 50}%)` }}
         >
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] p-2"
+              className="min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] p-2 transition-transform duration-300"
             >
               <ProductCard data={product} />
             </div>
@@ -89,14 +81,14 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
 
       <button
         onClick={prevSlide}
-        className="absolute left-2 top-1/2 -translate-y-1/2 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="absolute left-2 top-1/2 -translate-y-1/2  shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         disabled={currentIndex === 0}
       >
-        <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600" />
+        <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600 " />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-2 top-1/2 -translate-y-1/2 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="absolute right-2 top-1/2 -translate-y-1/2  shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         disabled={currentIndex === products.length - 1}
       >
         <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
