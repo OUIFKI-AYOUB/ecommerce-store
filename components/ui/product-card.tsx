@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 return (
     <div 
       onClick={handleClick} 
-      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-300  sm:dark:hover:bg-indigo-500"
+      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300 sm:hover:bg-pink-300 sm:dark:hover:bg-indigo-500 zoom-container"
     >      
       <div className="aspect-[4/5] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
         {/* Wishlist button */}
