@@ -80,6 +80,3 @@ html, body {
  }
 }
 
-* {
-  box-sizing: border-box; /* Ensures elements are sized correctly without causing overflow */
-}
