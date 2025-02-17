@@ -9,12 +9,14 @@ import { Product, Size, Color } from "@/types";
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import useCart from "@/hooks/use-cart";
 import { useTranslations } from 'next-intl';
+import { HtmlContent } from "@/components/ui/html-content";
 
 interface InfoProps {
     data: Product;
+    showDescription?: boolean; 
 }
 
-const Info: React.FC<InfoProps> = ({ data }) => {
+const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
     const [selectedSize, setSelectedSize] = useState<Size | null>(null);
     const [selectedColor, setSelectedColor] = useState<Color | null>(null);
     const [quantity, setQuantity] = useState(1);
@@ -295,14 +297,16 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                 </div>
 
 
-                {data.description && (
-                    <div className="mt-4">
-                        <h2 className="text-lg font-semibold mb-2 dark:text-gray-200">
-                            {t('productDescription')}
-                        </h2>
-                        <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{data.description}</p>
-                    </div>
-                )}
+                {data.description && showDescription && ( // Add showDescription condition
+    <div className="mt-4">
+        <h2 className="text-lg font-semibold mb-2 dark:text-gray-200">
+            {t('productDescription')}
+        </h2>
+        <div className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            <HtmlContent content={data.description} />
+        </div>
+    </div>
+)}
             </div>
 
 

@@ -87,7 +87,7 @@ const useCart = create(
         };
 
         if (isOutOfStock()) {
-          toast.error("This item is currently out of stock.");
+          toast.error("هذا المنتج غير متوفر حاليًا في المخزون");
           return;
         }
 
@@ -96,7 +96,7 @@ const useCart = create(
         const newQuantity = currentQuantity + quantity;
 
         if (newQuantity > availableQuantity) {
-          toast.error(`Sorry, only ${availableQuantity - currentQuantity} more item(s) available.`);
+          toast.error(`عذرًا، لم يتبقَ سوى ${availableQuantity - currentQuantity} من هذا المنتج`);
           return;
         }
 
@@ -108,10 +108,10 @@ const useCart = create(
                 : item
             ),
           });
-          toast.success("Item quantity updated in cart.");
+          toast.success("تم تحديث كمية المنتج في سلة التسوق");
         } else {
           set({ items: [...currentItems, { ...data, quantity, selectedSize, selectedColor }] });
-          toast.success("Item added to cart.");
+          toast.success("تم إضافة المنتج إلى سلة التسوق");
         }
       },
 
@@ -124,7 +124,7 @@ const useCart = create(
                 item.selectedColor?.id === selectedColor?.id)
           ),
         }));
-        toast.success("Item removed from the cart.");
+        toast.success("تم إزالة المنتج من سلة التسوق");
       },
 
       updateQuantity: (id: string, quantity: number, selectedSize?: Size, selectedColor?: Color) => {
@@ -136,7 +136,7 @@ const useCart = create(
         );
       
         if (!itemToUpdate) {
-          toast.error("Item not found in cart.");
+          toast.error("لم يتم العثور على المنتج في سلة التسوق");
           return;
         }
       
@@ -148,10 +148,10 @@ const useCart = create(
                 item === itemToUpdate ? { ...item, quantity } : item
               ),
             });
-            toast.success("Item quantity updated.");
+            toast.success("تم تحديث كمية المنتج");
             return;
           } else {
-            toast.error(`Only ${itemToUpdate.quantity} items available.`);
+            toast.error(`متوفر فقط ${itemToUpdate.quantity} من هذا المنتج`);
             return;
           }
         }
@@ -203,9 +203,9 @@ const useCart = create(
         item === itemToUpdate ? { ...item, quantity } : item
       ),
     });
-    toast.success("Item quantity updated.");
+    toast.success("تم تحديث كمية المنتج");
   } else {
-    toast.error(`Only ${availableQuantity} items available.`);
+    toast.error(`متوفر فقط  ${availableQuantity} من هذا المنتج`);
   }
 },
 

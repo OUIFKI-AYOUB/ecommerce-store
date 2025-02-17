@@ -52,16 +52,22 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
     (page - 1) * PRODUCTS_PER_PAGE,
     page * PRODUCTS_PER_PAGE
   );
+  const allSizes = await getSizes();
+  const allColors = await getColors();
 
-  const sizes = await getSizes();
-  const colors = await getColors();
+
+  const availableSizes = allSizes.filter(size =>
+    products.some(product => product.sizes?.some(pSize => pSize.id === size.id))
+  );
+
+  const availableColors = allColors.filter(color =>
+    products.some(product => product.colors?.some(pColor => pColor.id === color.id))
+  );
+
+
   const category = await getCategory(params.categoryId);
 
   const t = await getTranslations('navigation')
-
-  const hasColors = products.some(product => product.colors?.length > 0);
-  const hasSizes = products.some(product => product.sizes?.length > 0);
-
 
   return (
     <Container>
@@ -74,10 +80,9 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
         </div>
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
-            <DesktopFilters 
-              sizes={hasSizes ? sizes : []} 
-              colors={hasColors ? colors : []} 
-            />
+          {(availableSizes.length > 0 || availableColors.length > 0) && (
+  <DesktopFilters sizes={availableSizes} colors={availableColors} />
+)}
           <div className="lg:col-span-4">
   <div className="flex items-center justify-between mb-6">
     <h2 className="text-2xl font-bold dark:text-white">{category.name}</h2>
@@ -85,10 +90,9 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
       <div className="lg:ml-4">
         <SortFilter />
       </div>
-      <MobileFilters 
-        sizes={hasSizes ? sizes : []} 
-        colors={hasColors ? colors : []} 
-      />
+      {(availableSizes.length > 0 || availableColors.length > 0) && (
+  <MobileFilters sizes={availableSizes} colors={availableColors} />
+)}
     </div>
   </div>
 

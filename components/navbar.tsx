@@ -20,7 +20,7 @@ const Navbar = async () => {
   return (
     <div className="border-b fixed top-0 w-full bg-white dark:bg-black z-50">
       <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
+        <div className="relative px-4 sm:px-6 lg:px-8 flex h-20 items-center">
           <div className="lg:hidden flex items-center space-x-2">
             <MobileNav data={categories} />
             <LanguageSwitcher />
@@ -33,7 +33,7 @@ const Navbar = async () => {
               alt="Logo"
               width={180}
               height={60}
-              className="h-16 w-auto"
+              className="h-20 w-auto"
             />
           </Link>
 

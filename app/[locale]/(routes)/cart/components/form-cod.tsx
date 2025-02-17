@@ -183,7 +183,7 @@ const FormCod: React.FC<FormCodProps> = ({ onClose, items }) => {
         </div>
                 <Button 
             type="submit" 
-            className="w-full" 
+            className="w-full hover:bg-black dark:hover:bg-white" 
             disabled={isSubmitting}
         >
            {isSubmitting ? t('processing') : t('confirmOrder')}   

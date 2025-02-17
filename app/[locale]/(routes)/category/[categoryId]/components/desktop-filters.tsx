@@ -30,9 +30,9 @@ const DesktopFilters: React.FC<DesktopFiltersProps> = ({ sizes, colors }) => {
       {showFilters && (
         <div className="space-y-4">
           <PriceFilter />
-          <Filter valueKey="sizeId" name={t('sizes')} data={sizes} />
-          <Filter valueKey="colorId" name={t('colors')}  data={colors} />
-        </div>
+          {sizes.length > 0 && <Filter valueKey="sizeId" name={t('sizes')} data={sizes} />}
+          {colors.length > 0 && <Filter valueKey="colorId" name={t('colors')} data={colors} />}
+          </div>
       )}
     </div>
   );

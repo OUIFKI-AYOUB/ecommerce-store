@@ -63,7 +63,7 @@
     "total": "Total",
     "stockLimit": "Only {count} items available.",
     "toasts": {
-      "paymentCanceled": "Payment canceled",
+      "paymentCanceled": "Payment canceled فشلت عملية الدفع",
       "error": "Something went wrong. Please try again.",
       "success": "Order placed successfully! You'll pay on delivery.",
       "stockIssuesFound": "Stock Issues Found",

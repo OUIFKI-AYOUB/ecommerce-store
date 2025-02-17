@@ -172,7 +172,7 @@ const Summary = () => {
                 <Button
                     onClick={onCheckout}
                     disabled={items.length === 0 || isProcessing}
-                    className="w-full mt-6"
+                    className="w-full mt-6 hover:bg-black dark:hover:bg-white"
                 >
                     {isProcessing
                         ? t('processing')
