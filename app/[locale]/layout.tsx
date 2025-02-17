@@ -6,9 +6,10 @@ import Navbar from "@/components/navbar";
 import ModalalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { useLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
+import { ScrollReset } from '@/components/scroll-reset';
+import ClientLayout from "./client-layout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -49,17 +50,20 @@ export default async function LocaleLayout({
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale} >
+    <html lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-y-auto`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <ModalalProvider />
-            <ToastProvider />
-            <Navbar />
-            <main className="flex-grow pt-16">
-              {children}
-            </main>
-            <Footer />
+            <ClientLayout>
+              <ModalalProvider />
+              <ToastProvider />
+              <Navbar />
+              <ScrollReset />
+              <main className="flex-grow pt-16">
+                {children}
+              </main>
+              <Footer />
+            </ClientLayout>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

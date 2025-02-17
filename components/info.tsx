@@ -143,7 +143,11 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
                                 style={type === 'color' ? { backgroundColor: (option as Color).value } : {}}
                                 onClick={() => {
                                     if (isAvailable) {
-                                        setOption(option as any);
+                                        if (selectedOption?.id === option.id) {
+                                            setOption(null); // Unselect if already selected
+                                        } else {
+                                            setOption(option as any); // Select new option
+                                        }
                                         setQuantity(1);
                                         setMessage(null);
                                     }

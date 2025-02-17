@@ -128,7 +128,7 @@ const Gallery = ({ media }: GalleryProps) => {
           <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
             <button
               onClick={prevMedia}
-              className="p-2 -m-[10px] rounded-full shadow  text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              className="p-2 -m-[10px] rounded-full shadow  text-gray-800 hover:bg-white dark:hover:bg-gray-800 focus:outline-none pointer-events-auto"
               style={{ touchAction: 'manipulation' }}
               type="button"
             >
@@ -136,7 +136,7 @@ const Gallery = ({ media }: GalleryProps) => {
             </button>
             <button
               onClick={nextMedia}
-              className="p-2 -m-[10px]  shadow  rounded-full  text-gray-800 hover:bg-white focus:outline-none pointer-events-auto"
+              className="p-2 -m-[10px]  shadow  rounded-full  text-gray-800 hover:bg-white dark:hover:bg-gray-800 focus:outline-none pointer-events-auto"
               style={{ touchAction: 'manipulation' }}
               type="button"
             >

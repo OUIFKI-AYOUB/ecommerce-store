@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 return (
     <div 
       onClick={handleClick} 
-      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-300  sm:dark:hover:bg-indigo-500"
+      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border hover:scale-105 duration-500 transition-transform dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-300  sm:dark:hover:bg-indigo-500"
     >      
       <div className="aspect-[4/5] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
         {/* Wishlist button */}
@@ -96,7 +96,7 @@ return (
             src={firstImage.url}
             alt={data.name}
             fill
-            className="aspect-[4/5] sm:aspect-square object-cover rounded-md"
+            className="aspect-[4/5] sm:aspect-square object-cover rounded-md hover:scale-105 duration-500 transition-transform"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

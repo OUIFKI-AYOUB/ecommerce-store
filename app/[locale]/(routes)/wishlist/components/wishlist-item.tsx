@@ -54,12 +54,12 @@ const WishlistItem: React.FC<CartItemProps> = ({ data }) => {
             <Currency value={data.price} />
           </div>
           
-          <div className="flex gap-2">
+          <div className="flex gap-6 ">
             <button 
               onClick={onNavigateToProduct}
-              className="rounded-full bg-white flex justify-center items-center transition-all duration-500 hover:bg-[#9aecff] hover:scale-110 w-10 h-10"
+              className="rounded-full bg-gray-800 dark:bg-white flex justify-center items-center transition-all duration-500 hover:bg-pink-500 dark:hover:bg-pink-500 hover:scale-110 w-10 h-10"
             >
-              <ShoppingCart size={20} className="text-gray-600" />
+              <ShoppingCart size={20} className=" text-zinc-100 dark:text-gray-600" />
             </button>
             
             <IconButton
