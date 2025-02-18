@@ -41,11 +41,11 @@ export default async function SearchPage({
   return (
     <Container>
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold">Search Results for "{query}"</h1>
+        <h1 className="text-3xl font-bold pt-6 ">Search Results for "{query}"</h1>
         {filteredProducts.length === 0 ? (
           <p>No products found.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-6">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} data={product} />
             ))}

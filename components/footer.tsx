@@ -97,7 +97,7 @@ const Footer = () => {
 
       
     </footer>
-    <div className="pt-2 pb-2 text-center text-[14px] text-gray-600 dark:text-gray-300 dark  bg-gray-100 dark:bg-gray-800">
+    <div className="pt-2 pb-2 text-center text-[15px] text-gray-600 dark:text-gray-300 dark  bg-gray-100 dark:bg-gray-800">
           © 2025 - Matjar leafifat. All rights reserved. developed by{' '}
           <a
             href="https://k-voyd.com"
