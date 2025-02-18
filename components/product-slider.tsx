@@ -14,65 +14,44 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [currentX, setCurrentX] = useState(0);
   const [imagesPerView, setImagesPerView] = useState(4);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateImagesPerView = () => {
-      if (window.innerWidth >= 1024) setImagesPerView(4);
-      else if (window.innerWidth >= 768) setImagesPerView(3);
-      else setImagesPerView(2);
+      if (window.innerWidth >= 1024) setImagesPerView(4); // lg
+      else if (window.innerWidth >= 768) setImagesPerView(3); // md
+      else setImagesPerView(2); // mobile
     };
 
     updateImagesPerView();
     window.addEventListener('resize', updateImagesPerView);
+    
     return () => window.removeEventListener('resize', updateImagesPerView);
   }, []);
 
   const totalSlides = Math.max(0, Math.ceil((products.length - imagesPerView) / 1));
 
-// In the component, update the touch handlers:
-
-const handleTouchStart = (e: TouchEvent) => {
-  const touch = e.touches[0];
-  const targetElement = touch.target as HTMLElement;
-  
-  // Only initiate sliding if touch starts on the slider container
-  if (targetElement.closest('.slider-container')) {
+  const handleTouchStart = (e: TouchEvent) => {
     setIsDragging(true);
-    setStartX(touch.clientX);
-    setCurrentX(touch.clientX);
-  }
-};
+    setStartX(e.touches[0].clientX);
+  };
 
-const handleTouchMove = (e: TouchEvent) => {
-  if (!isDragging) return;
-  
-  const touch = e.touches[0];
-  const targetElement = touch.target as HTMLElement;
-  
-  // Allow regular scrolling if not touching the slider container
-  if (!targetElement.closest('.slider-container')) {
-    setIsDragging(false);
-    return;
-  }
-  
-  setCurrentX(touch.clientX);
-  const diff = startX - currentX;
-  const threshold = 50;
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!isDragging) return;
+    
+    const currentX = e.touches[0].clientX;
+    const diff = startX - currentX;
 
-  if (Math.abs(diff) > threshold) {
-    if (diff > 0 && currentIndex < totalSlides) {
-      setCurrentIndex(prev => prev + 1);
-      setIsDragging(false);
-    } else if (diff < 0 && currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
+    if (Math.abs(diff) > 150) {
+      if (diff > 0 && currentIndex < totalSlides) {
+        setCurrentIndex(prev => prev + 1);
+      } else if (diff < 0 && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
       setIsDragging(false);
     }
-  }
-};
-
+  };
 
   const handleTouchEnd = () => {
     setIsDragging(false);
@@ -94,18 +73,15 @@ const handleTouchMove = (e: TouchEvent) => {
     <div className="relative">
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
       <div 
-        className="overflow-hidden touch-pan-x"
+        className="overflow-hidden touch-pan-y"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="flex transition-transform duration-300 ease-out"
-          style={{ 
-            transform: `translateX(-${currentIndex * (100 / imagesPerView)}%)`,
-            touchAction: 'pan-x'
-          }}
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentIndex * (100 / imagesPerView)}%)` }}
         >
           {products.map((product) => (
             <div
@@ -134,6 +110,7 @@ const handleTouchMove = (e: TouchEvent) => {
         <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
       </button>
 
+      {/* Dots Navigation */}
       <div className="flex justify-center mt-4 space-x-1.5">
         {Array.from({ length: totalSlides + 1 }).map((_, idx) => (
           <button
