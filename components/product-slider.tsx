@@ -74,8 +74,8 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
     <div className="relative">
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
       <div 
-        className="overflow-hidden touch-pan-x"
-        ref={sliderRef}
+  className="overflow-x-auto overflow-y-hidden scrollbar-hide" // Add these classes
+  ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
