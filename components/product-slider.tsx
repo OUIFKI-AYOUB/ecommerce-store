@@ -44,19 +44,41 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+      
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-
-    if (isLeftSwipe && currentIndex < totalSlides) {
-      setCurrentIndex(prev => prev + 1);
-    }
-    
-    if (isRightSwipe && currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
-    }
+  
+    // Add requestAnimationFrame for smooth updates
+    requestAnimationFrame(() => {
+      if (isLeftSwipe && currentIndex < totalSlides) {
+        setCurrentIndex(prev => prev + 1);
+      }
+      
+      if (isRightSwipe && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+      }
+    });
   };
+  
+  // Add a scroll event listener to sync dots with manual scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sliderRef.current) return;
+      
+      const scrollPosition = sliderRef.current.scrollLeft;
+      const itemWidth = sliderRef.current.clientWidth;
+      const newIndex = Math.round(scrollPosition / itemWidth);
+      
+      if (newIndex !== currentIndex) {
+        setCurrentIndex(newIndex);
+      }
+    };
+  
+    sliderRef.current?.addEventListener('scroll', handleScroll);
+    return () => sliderRef.current?.removeEventListener('scroll', handleScroll);
+  }, [currentIndex]);
+  
 
   const nextSlide = () => {
     if (currentIndex < totalSlides) {
