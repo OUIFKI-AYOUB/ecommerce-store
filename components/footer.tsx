@@ -19,8 +19,8 @@ const Footer = () => {
     <footer className="flex flex-col md:flex-row bg-gray-100 dark:bg-gray-800">
       {/* Store Information Section */}
       <div className="flex-1 flex flex-col p-5">
-        <h1 className="text-2xl font-bold"> متجر العفيفات 🌺</h1>
-        <p className="my-5">
+        <h1 className="text-base font-bold"> متجر العفيفات 🌺</h1>
+        <p className="my-5 text-sm">
           بيع الملابس الشرعية نقابات عباءات حجابات
           <br />
           قفازات كل ما تحتاجه المرأة المسلمة
@@ -42,12 +42,12 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <div className="my-2 border-t dark:border-gray-700" />
+      <div className=" border-t dark:border-gray-700" />
 
       {/* Useful Links Section */}
       <div className="flex-1 p-5">
-        <h3 className="text-xl font-semibold mb-8">Useful links</h3>
-        <ul className="m-0 p-0 list-none flex flex-wrap">
+        <h3 className="text-base font-semibold mb-4">Useful links</h3>
+        <ul className="m-0 p-0 text-sm list-none flex flex-wrap">
           {[
             { id: 'home', name: t('Home'), path: '/' },
             { id: 'all-products', name: t('AllProducts'), path: '/all-products' },
@@ -66,11 +66,11 @@ const Footer = () => {
         
       </div>
 
-      <div className="my-2 border-t dark:border-gray-700" />
+      <div className=" border-t dark:border-gray-700" />
 
       {/* Contact Information Section */}
       <div className="flex-1 p-5">
-        <h3 className="text-xl font-semibold mb-4">Contact</h3>
+        <h3 className="text-base font-semibold mb-4">Contact</h3>
         {[
           { Icon: Place, text: 'طنجة .الخيرية دبن ديبان قرب الدائرة 6 القديمة' },
           { Icon: Place, text: 'طنجة .الحومة الحداد قرب سوق الحداد' },
@@ -78,8 +78,10 @@ const Footer = () => {
           { Icon: Mail, text: 'jie@gmail.com' },
         ].map(({ Icon, text }, index) => (
           <div key={index} className="mb-5 flex items-center text-gray-700 dark:text-gray-200">
-            <Icon className="mr-5 text-gray-600 dark:text-gray-300" />
-            {text}
+            <Icon className="mr-5  text-gray-600 dark:text-gray-300" />
+          <div className='text-[15px]'>
+          {text}
+            </div>  
           </div>
         ))}
         <Image
@@ -95,7 +97,7 @@ const Footer = () => {
 
       
     </footer>
-    <div className="pt-4 pb-4 text-center text-[15px] text-gray-600 dark:text-gray-300 dark  bg-gray-100 dark:bg-gray-800">
+    <div className="pt-2 pb-2 text-center text-[14px] text-gray-600 dark:text-gray-300 dark  bg-gray-100 dark:bg-gray-800">
           © 2025 - Matjar leafifat. All rights reserved. developed by{' '}
           <a
             href="https://k-voyd.com"

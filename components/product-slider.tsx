@@ -12,12 +12,11 @@ interface ProductSliderProps {
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
   const [imagesPerView, setImagesPerView] = useState(4);
   const sliderRef = useRef<HTMLDivElement>(null);
-
-  const minSwipeDistance = 50;
 
   useEffect(() => {
     const updateImagesPerView = () => {
@@ -34,51 +33,32 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const totalSlides = Math.max(0, Math.ceil((products.length - imagesPerView) / 1));
 
   const handleTouchStart = (e: TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.touches[0].clientX);
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setCurrentX(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e: TouchEvent) => {
-    setTouchEnd(e.touches[0].clientX);
+    if (!isDragging) return;
+    
+    setCurrentX(e.touches[0].clientX);
+    const diff = startX - currentX;
+    const threshold = 50; // Reduced threshold for more responsive sliding
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0 && currentIndex < totalSlides) {
+        setCurrentIndex(prev => prev + 1);
+        setIsDragging(false);
+      } else if (diff < 0 && currentIndex > 0) {
+        setCurrentIndex(prev => prev - 1);
+        setIsDragging(false);
+      }
+    }
   };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-      
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-  
-    // Add requestAnimationFrame for smooth updates
-    requestAnimationFrame(() => {
-      if (isLeftSwipe && currentIndex < totalSlides) {
-        setCurrentIndex(prev => prev + 1);
-      }
-      
-      if (isRightSwipe && currentIndex > 0) {
-        setCurrentIndex(prev => prev - 1);
-      }
-    });
+    setIsDragging(false);
   };
-  
-  // Add a scroll event listener to sync dots with manual scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sliderRef.current) return;
-      
-      const scrollPosition = sliderRef.current.scrollLeft;
-      const itemWidth = sliderRef.current.clientWidth;
-      const newIndex = Math.round(scrollPosition / itemWidth);
-      
-      if (newIndex !== currentIndex) {
-        setCurrentIndex(newIndex);
-      }
-    };
-  
-    sliderRef.current?.addEventListener('scroll', handleScroll);
-    return () => sliderRef.current?.removeEventListener('scroll', handleScroll);
-  }, [currentIndex]);
-  
 
   const nextSlide = () => {
     if (currentIndex < totalSlides) {
@@ -96,15 +76,18 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
     <div className="relative">
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
       <div 
-  className="overflow-x-auto overflow-y-hidden scrollbar-hide" // Add these classes
-  ref={sliderRef}
+        className="overflow-hidden touch-pan-x"
+        ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentIndex * (100 / imagesPerView)}%)` }}
+          className="flex transition-transform duration-300 ease-out"
+          style={{ 
+            transform: `translateX(-${currentIndex * (100 / imagesPerView)}%)`,
+            touchAction: 'pan-x'
+          }}
         >
           {products.map((product) => (
             <div
