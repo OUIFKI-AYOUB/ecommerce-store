@@ -32,29 +32,47 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
 
   const totalSlides = Math.max(0, Math.ceil((products.length - imagesPerView) / 1));
 
-  const handleTouchStart = (e: TouchEvent) => {
+// In the component, update the touch handlers:
+
+const handleTouchStart = (e: TouchEvent) => {
+  const touch = e.touches[0];
+  const targetElement = touch.target as HTMLElement;
+  
+  // Only initiate sliding if touch starts on the slider container
+  if (targetElement.closest('.slider-container')) {
     setIsDragging(true);
-    setStartX(e.touches[0].clientX);
-    setCurrentX(e.touches[0].clientX);
-  };
+    setStartX(touch.clientX);
+    setCurrentX(touch.clientX);
+  }
+};
 
-  const handleTouchMove = (e: TouchEvent) => {
-    if (!isDragging) return;
-    
-    setCurrentX(e.touches[0].clientX);
-    const diff = startX - currentX;
-    const threshold = 50; // Reduced threshold for more responsive sliding
+const handleTouchMove = (e: TouchEvent) => {
+  if (!isDragging) return;
+  
+  const touch = e.touches[0];
+  const targetElement = touch.target as HTMLElement;
+  
+  // Allow regular scrolling if not touching the slider container
+  if (!targetElement.closest('.slider-container')) {
+    setIsDragging(false);
+    return;
+  }
+  
+  setCurrentX(touch.clientX);
+  const diff = startX - currentX;
+  const threshold = 50;
 
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0 && currentIndex < totalSlides) {
-        setCurrentIndex(prev => prev + 1);
-        setIsDragging(false);
-      } else if (diff < 0 && currentIndex > 0) {
-        setCurrentIndex(prev => prev - 1);
-        setIsDragging(false);
-      }
+  if (Math.abs(diff) > threshold) {
+    if (diff > 0 && currentIndex < totalSlides) {
+      setCurrentIndex(prev => prev + 1);
+      setIsDragging(false);
+    } else if (diff < 0 && currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
+      setIsDragging(false);
     }
-  };
+  }
+};
+
 
   const handleTouchEnd = () => {
     setIsDragging(false);
