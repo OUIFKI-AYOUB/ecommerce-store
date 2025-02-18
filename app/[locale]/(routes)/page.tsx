@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import getBillboards from "@/actions/get-billboard";
 import getProducts from "@/actions/get-products";
@@ -10,6 +11,7 @@ import getComments from "@/actions/get-comments";
 import Link from "next/link";
 import { MotionDiv } from "@/components/animations/motion-wrapper";
 import { getTranslations } from 'next-intl/server';
+import { DeliveryInfo } from "@/components/delivery-info";
 
 export const revalidate = 0;
 
@@ -107,6 +109,8 @@ const HomePage = async () => {
             </MotionDiv>
           )}
         </MotionDiv>
+        <DeliveryInfo />
+
       </Container>
     </div>
   );

@@ -12,49 +12,50 @@ interface ProductSliderProps {
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [imagesPerView, setImagesPerView] = useState(4);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  const minSwipeDistance = 50;
+
   useEffect(() => {
     const updateImagesPerView = () => {
-      if (window.innerWidth >= 1024) setImagesPerView(4); // lg
-      else if (window.innerWidth >= 768) setImagesPerView(3); // md
-      else setImagesPerView(2); // mobile
+      if (window.innerWidth >= 1024) setImagesPerView(4);
+      else if (window.innerWidth >= 768) setImagesPerView(3);
+      else setImagesPerView(2);
     };
 
     updateImagesPerView();
     window.addEventListener('resize', updateImagesPerView);
-    
     return () => window.removeEventListener('resize', updateImagesPerView);
   }, []);
 
   const totalSlides = Math.max(0, Math.ceil((products.length - imagesPerView) / 1));
 
   const handleTouchStart = (e: TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].clientX);
+    setTouchEnd(null);
+    setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e: TouchEvent) => {
-    if (!isDragging) return;
-    
-    const currentX = e.touches[0].clientX;
-    const diff = startX - currentX;
-
-    if (Math.abs(diff) > 150) {
-      if (diff > 0 && currentIndex < totalSlides) {
-        setCurrentIndex(prev => prev + 1);
-      } else if (diff < 0 && currentIndex > 0) {
-        setCurrentIndex(prev => prev - 1);
-      }
-      setIsDragging(false);
-    }
+    setTouchEnd(e.touches[0].clientX);
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && currentIndex < totalSlides) {
+      setCurrentIndex(prev => prev + 1);
+    }
+    
+    if (isRightSwipe && currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
+    }
   };
 
   const nextSlide = () => {
@@ -73,7 +74,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
     <div className="relative">
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
       <div 
-        className="overflow-hidden touch-pan-y"
+        className="overflow-hidden touch-pan-x"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -110,7 +111,6 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
         <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
       </button>
 
-      {/* Dots Navigation */}
       <div className="flex justify-center mt-4 space-x-1.5">
         {Array.from({ length: totalSlides + 1 }).map((_, idx) => (
           <button

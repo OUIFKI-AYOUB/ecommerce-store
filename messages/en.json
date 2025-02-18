@@ -72,6 +72,25 @@
       "pleaseAdjustCart": "Please adjust your cart before proceeding to checkout"
     }
   },
+  "delivery": {
+    "fastDelivery": {
+      "title": "FAST DELIVERY",
+      "description": "Fast and secure delivery"
+    },
+    "payment": {
+      "title": "CASH ON DELIVERY & ONLINE",
+      "description": "Secure payment"
+    },
+    "support": {
+      "title": "Always at your service",
+      "description": "Our team is available via Email & WhatsApp"
+    },
+    "store": {
+      "title": "OUR STORE OPEN 7/7",
+      "description": "Visit us "
+    }
+  },
+
 "codForm": {
     "title": "Cash on Delivery Details",
     "fullName": "Full Name",

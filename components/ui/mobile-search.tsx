@@ -41,7 +41,7 @@ const MobileSearch = () => {
       ) : (
         <form 
           onSubmit={onSubmit}
-          className="absolute right-0 top-0 w-full max-w p-4 bg-white dark:bg-gray-900 shadow-lg rounded-lg z-50"
+          className="absolute right-0 top-0 w-full max-w p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg z-50"
         >
           <div className="flex items-center gap-2">
             <input
@@ -49,7 +49,7 @@ const MobileSearch = () => {
               placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 border dark:border-gray-700 p-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+              className="flex-1 border dark:border-gray-700 p-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-400"
               autoFocus
             />
             <button 

@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 return (
     <div 
       onClick={handleClick} 
-      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border hover:scale-105 duration-500 transition-transform dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-300  sm:dark:hover:bg-indigo-500"
+      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border hover:scale-105 duration-500 transition-transform dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-500  sm:dark:hover:bg-pink-600"
     >      
       <div className="aspect-[4/5] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
         {/* Wishlist button */}
@@ -109,7 +109,7 @@ return (
           <div className="flex gap-x-2 md:gap-x-6 justify-center">
             <button
               onClick={onPreview}
-              className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
+              className="rounded-full bg-white dark:bg-gray-800 flex justify-center items-center m-[4px] md:m-[6px] transition-all duration-500 hover:bg-pink-300 dark:hover:bg-pink-600   hover:scale-110 w-[32px] h-[32px] md:w-[40px] md:h-[40px]"
             >
               <Expand size={16} className="text-gray-600 dark:text-gray-300 md:text-[20px]" />
             </button>

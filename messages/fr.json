@@ -27,6 +27,24 @@
       "addedToCart": "Article ajouté au panier avec succès!"
     }
   },
+  "delivery": {
+    "fastDelivery": {
+      "title": "LIVRAISON RAPIDE",
+      "description": "Livraison rapide et sécurisée"
+    },
+    "payment": {
+      "title": "PAIEMENT À LA LIVRAISON ET ONLINE",
+      "description": "Paiement sécurisé"
+    },
+    "support": {
+      "title": "Toujours à votre service",
+      "description": "Notre équipe est à votre disposition via E-mail & WhatsApp"
+    },
+    "store": {
+      "title": "NOTRE MAGASIN OUVERT 7/7",
+      "description": "Visitez-nous "
+    }
+  },
   "product-card": {
     "noImage": "No image available",
     "inStock": "In Stock",
@@ -154,6 +172,7 @@
       "apply": "Appliquer",
       "reset": "Réinitialiser"
     },
+    
 "sortOptions": {
   "default": "Trier par",
   "priceLowToHigh": "Prix, du moins au plus",
