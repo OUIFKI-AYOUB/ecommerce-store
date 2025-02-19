@@ -100,6 +100,17 @@ const getProducts = async (query: Query): Promise<Product[]> => {
 
   let products: Product[] = await res.json();
 
+    // Process media URLs
+    products = products.map(product => ({
+      ...product,
+      media: product.media.map(m => ({
+        ...m,
+        url: m.url.startsWith('/uploads') 
+          ? `${process.env.NEXT_PUBLIC_URL}${m.url}`
+          : m.url
+      }))
+    }));
+
 // Apply price filter if minPrice or maxPrice is provided
 if (query.minPrice || query.maxPrice) {
   products = products.filter((product) => {

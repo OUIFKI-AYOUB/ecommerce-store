@@ -8,8 +8,10 @@ const nextConfig = {
   images: {
     domains: [
       'i.ibb.co',
-      'res.cloudinary.com'
-    ],
+      'res.cloudinary.com',
+      'localhost',
+      process.env.NEXT_PUBLIC_URL ? new URL(process.env.NEXT_PUBLIC_URL).hostname : null
+    ].filter(Boolean),
   }
 };
 

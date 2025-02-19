@@ -14,6 +14,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
   const [imagesPerView, setImagesPerView] = useState(4);
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -25,9 +26,9 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
     };
 
     updateImagesPerView();
-    window.addEventListener('resize', updateImagesPerView);
-    
-    return () => window.removeEventListener('resize', updateImagesPerView);
+    window.addEventListener("resize", updateImagesPerView);
+
+    return () => window.removeEventListener("resize", updateImagesPerView);
   }, []);
 
   const totalSlides = Math.max(0, Math.ceil((products.length - imagesPerView) / 1));
@@ -35,21 +36,29 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const handleTouchStart = (e: TouchEvent) => {
     setIsDragging(true);
     setStartX(e.touches[0].clientX);
+    setStartY(e.touches[0].clientY);
   };
 
   const handleTouchMove = (e: TouchEvent) => {
     if (!isDragging) return;
-    
-    const currentX = e.touches[0].clientX;
-    const diff = startX - currentX;
 
-    if (Math.abs(diff) > 150) {
-      if (diff > 0 && currentIndex < totalSlides) {
-        setCurrentIndex(prev => prev + 1);
-      } else if (diff < 0 && currentIndex > 0) {
-        setCurrentIndex(prev => prev - 1);
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = startX - currentX;
+    const diffY = startY - currentY;
+
+    // Check if the movement is primarily horizontal
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault(); // Prevent vertical scrolling during horizontal swipe
+      if (Math.abs(diffX) > 50) {
+        // Reduced threshold for swipe detection
+        if (diffX > 0 && currentIndex < totalSlides) {
+          setCurrentIndex((prev) => prev + 1);
+        } else if (diffX < 0 && currentIndex > 0) {
+          setCurrentIndex((prev) => prev - 1);
+        }
+        setIsDragging(false);
       }
-      setIsDragging(false);
     }
   };
 
@@ -59,20 +68,20 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
 
   const nextSlide = () => {
     if (currentIndex < totalSlides) {
-      setCurrentIndex(prev => prev + 1);
+      setCurrentIndex((prev) => prev + 1);
     }
   };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
+      setCurrentIndex((prev) => prev - 1);
     }
   };
 
   return (
     <div className="relative">
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
-      <div 
+      <div
         className="overflow-hidden touch-pan-y"
         ref={sliderRef}
         onTouchStart={handleTouchStart}
