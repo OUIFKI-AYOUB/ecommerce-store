@@ -78,7 +78,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
           <button
             onClick={moveLeft}
             className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
-                     hover:bg-white hover:scale-105 transition-all duration-300 
+                     hover:bg-white hover:scale-100 transition-all duration-300 
                      border border-gray-200"
           >
             <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
@@ -88,7 +88,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
           <button
             onClick={moveRight}
             className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
-                     hover:bg-white hover:scale-105 transition-all duration-300 
+                     hover:bg-white hover:scale-100 transition-all duration-300 
                      border border-gray-200"
           >
             <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
