@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from 'next-intl';
 
@@ -16,6 +16,10 @@ interface CommentsSectionProps {
 const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('comment');
 
   // Update isMobile state based on window width
@@ -33,6 +37,39 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
   const imagesPerView = isMobile ? 3 : 4;  // Show 3 images on mobile
   const totalSlides = Math.max(0, Math.ceil((comments.length - imagesPerView) / 1));
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setStartY(e.touches[0].clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+    const diffX = startX - currentX;
+    const diffY = startY - currentY;
+
+    // Check if the movement is primarily horizontal
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault(); // Prevent vertical scrolling during horizontal swipe
+      if (Math.abs(diffX) > 50) {
+        // Reduced threshold for swipe detection
+        if (diffX > 0 && currentIndex < totalSlides) {
+          setCurrentIndex((prev) => prev + 1);
+        } else if (diffX < 0 && currentIndex > 0) {
+          setCurrentIndex((prev) => prev - 1);
+        }
+        setIsDragging(false);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   const moveLeft = () => {
     setCurrentIndex(prev =>
       prev === 0 ? totalSlides : prev - 1
@@ -49,7 +86,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
     <div className="comments-section py-6 md:py-10">
       <h2 className="text-2xl font-semibold text-center mb-6 md:mb-8">{t('comments')}</h2>
       <div className="relative px-2 md:px-4">
-        <div className="overflow-hidden">
+        <div
+          className="overflow-hidden touch-pan-y"
+          ref={sliderRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{
