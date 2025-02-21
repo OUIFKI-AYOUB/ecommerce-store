@@ -4,6 +4,7 @@ import { Dialog, DialogPanel, Transition, TransitionChild } from "@headlessui/re
 import { Fragment } from "react"
 import IconButton from "@/components/ui/icon-button"
 import { X } from "lucide-react"
+import { useLocale } from "next-intl";
 
 interface ModalProps {
     open: boolean
@@ -18,6 +19,9 @@ const Modal: React.FC<ModalProps> =({
     children
 
 })=>{
+
+    const locale = useLocale();
+
     return(
         <Transition show={open} appear as={Fragment}>
 
@@ -38,8 +42,8 @@ const Modal: React.FC<ModalProps> =({
                 <DialogPanel className={" w-full max-w-3xl  overflow-hidden rounded-lg  text-left align-middle "}>
                 <div className="relative flex w-full items-center overflow-hidden bg-white dark:bg-gray-900 px-4 pb-8 pt-14 shadow-2xl dark:shadow-gray-900 sm:px-6 sm:pt-8 md:p-6 lg:p-8">
 
-                        <div className="absolute right-4 top-4">
-                        <IconButton 
+                <div className={`${locale === "ar" ? "left-4" : "right-4"} absolute top-4`}>
+                <IconButton 
     onClick={onClose} 
     icon={<X size={15} className="dark:text-gray-200" />} 
     className="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition rounded-full p-1"

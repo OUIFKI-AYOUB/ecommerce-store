@@ -49,8 +49,8 @@ const WishlistItem: React.FC<CartItemProps> = ({ data }) => {
       </div>
       <div className="relative ml-4 flex flex-1 flex-col justify-between sm:ml-6">
         <div className="flex justify-between items-start">
-          <div className="flex-1">
-            <p className="text-lg font-semibold text-primary">{data.name}</p>
+          <div className="flex-1 rtl:mr-4">
+            <p className="text-lg font-semibold text-primary ">{data.name}</p>
             <Currency value={data.price} />
           </div>
           

@@ -20,6 +20,8 @@
     "selectedColor": "Couleur sélectionnée",
     "availableQuantity": "Quantité disponible",
     "none": "Aucun",
+    "RELATED_PRODUCTS": "Produits associés",
+
     "alerts": {
       "selectSize": "Veuillez sélectionner une taille et une couleur avant d'ajouter au panier",
       "selectColor": "Veuillez sélectionner une couleur avant d'ajouter au panier",
@@ -30,7 +32,7 @@
   "delivery": {
     "fastDelivery": {
       "title": "LIVRAISON RAPIDE",
-      "description": "Livraison rapide et sécurisée"
+      "description": "Livraison rapide et sécurisée vers toutes les villes du Maroc"
     },
     "payment": {
       "title": "PAIEMENT À LA LIVRAISON ET ONLINE",
@@ -53,7 +55,9 @@
   "mobile-nav": {
     "Home": "Accueil",
     "AllProducts": "Tous les produits",
-    "NewArrivals": "Nouveautés"
+    "NewArrivals": "Nouveautés",
+    "Search": "Rechercher",
+    "Cancel": "Annuler"
 },
 
   "wishlist": {
@@ -153,13 +157,19 @@
     "title": "Résultats de recherche",
     "description": "Résultats de recherche pour les produits",
     "resultsFor": "Résultats de recherche pour \"{query}\"",
-    "noResults": "Aucun produit trouvé."
+    "noResults": "Aucun produit trouvé.",
+    "SearchProdudcts": "Rechercher des produits"
+
   },
   "filters": {
     "button": "Filtres",
     "sizes": "Tailles",
     "colors": "Couleurs",
     "price": "Prix",
+    "Previous": "Précedent",
+    "Next": "Suivant",
+    "of": "de",
+
     "noResults": "Aucun résultat trouvé",
     "category": {
       "title": "Catégories",

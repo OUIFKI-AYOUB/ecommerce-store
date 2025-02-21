@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Comment {
   id: string;
@@ -21,6 +21,8 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
   const [startY, setStartY] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('comment');
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
 
   // Update isMobile state based on window width
   useEffect(() => {
@@ -34,7 +36,7 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
   }, []);
 
   // Calculate slides based on screen size
-  const imagesPerView = isMobile ? 3 : 4;  // Show 3 images on mobile
+  const imagesPerView = isMobile ? 2 : 4;  // Show 3 images on mobile
   const totalSlides = Math.max(0, Math.ceil((comments.length - imagesPerView) / 1));
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -93,16 +95,16 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / imagesPerView)}%)`,
-            }}
-          >
+<div
+        className="flex transition-transform duration-700 ease-in-out"
+        style={{
+          transform: `translateX(${isRTL ? '' : '-'}${currentIndex * (100 / imagesPerView)}%)`,
+        }}
+      >
             {comments.map((comment) => (
               <div
                 key={comment.id}
-                className="flex-shrink-0 w-1/3 md:w-1/4 px-1 md:px-2"  // Updated to w-1/3 for mobile
+                className="flex-shrink-0 w-1/2 md:w-1/4 px-1 md:px-2"  // Updated to w-1/3 for mobile
               >
                 <div className="aspect-square relative">
                   <img
@@ -116,30 +118,57 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="absolute inset-y-0 left-0 flex items-center">
-          <button
-            onClick={moveLeft}
-            className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
-                     hover:bg-white hover:scale-100 transition-all duration-300 
-                     border border-gray-200"
-          >
-            <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-          </button>
-        </div>
-        <div className="absolute inset-y-0 right-0 flex items-center">
-          <button
-            onClick={moveRight}
-            className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
-                     hover:bg-white hover:scale-100 transition-all duration-300 
-                     border border-gray-200"
-          >
-            <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-          </button>
-        </div>
+       {/* Navigation Buttons */}
+       {isRTL ? (
+          <>
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <button
+                onClick={moveLeft}
+                className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
+                         hover:bg-white hover:scale-100 transition-all duration-300 
+                         border border-gray-200"
+              >
+                <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
+              </button>
+            </div>
+            <div className="absolute inset-y-0 left-0 flex items-center">
+              <button
+                onClick={moveRight}
+                className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
+                         hover:bg-white hover:scale-100 transition-all duration-300 
+                         border border-gray-200"
+              >
+                <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-y-0 left-0 flex items-center">
+              <button
+                onClick={moveLeft}
+                className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
+                         hover:bg-white hover:scale-100 transition-all duration-300 
+                         border border-gray-200"
+              >
+                <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
+              </button>
+            </div>
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <button
+                onClick={moveRight}
+                className="bg-white/80 backdrop-blur-sm text-gray-800 p-1.5 md:p-2 rounded-lg shadow-lg 
+                         hover:bg-white hover:scale-100 transition-all duration-300 
+                         border border-gray-200"
+              >
+                <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
+              </button>
+            </div>
+          </>
+        )}
 
         {/* Dots Navigation */}
-        <div className="flex justify-center mt-3 md:mt-4 space-x-1.5">
+        <div className="flex justify-center mt-3 md:mt-4 space-x-1.5 space-x-reverse">
           {Array.from({ length: totalSlides + 1 }).map((_, idx) => (
             <button
               key={idx}

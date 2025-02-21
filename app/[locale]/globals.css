@@ -12,6 +12,16 @@ html, body {
 }
 
 
+.rtl {
+  direction: rtl;
+}
+
+@media (min-width: 1024px) { /* 1024px correspond généralement aux laptops */
+  .rtl-laptop {
+      direction: rtl;
+  }
+}
+
 @layer base {
   :root {
   --background: 0 0% 100%;

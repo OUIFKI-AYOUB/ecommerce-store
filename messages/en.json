@@ -21,6 +21,7 @@
       "selectedColor": "Selected Color",
       "availableQuantity": "Available Quantity",
       "none": "None",
+      "RELATED_PRODUCTS": "Related Products",
       "alerts": {
         "selectSize": "Please select a size and a color before adding to cart",
         "selectColor": "Please select a color before adding to cart",
@@ -75,7 +76,7 @@
   "delivery": {
     "fastDelivery": {
       "title": "FAST DELIVERY",
-      "description": "Fast and secure delivery"
+      "description":   " Fast and secure delivery to all Moroccan cities"
     },
     "payment": {
       "title": "CASH ON DELIVERY & ONLINE",
@@ -113,7 +114,9 @@
 "mobile-nav": {
     "Home": "Home",
     "AllProducts": "All Products",
-    "NewArrivals": "New Arrivals"
+    "NewArrivals": "New Arrivals",
+    "Search": "Search...",
+    "Cancel": "Cancel"
 },
 
   "success": {
@@ -168,7 +171,8 @@
     "title": "Search Results",
     "description": "Search results for products",
     "resultsFor": "Search Results for \"{query}\"",
-    "noResults": "No products found."
+    "noResults": "No products found.",
+    "SearchProdudcts": "Search Products"
   },
   "filters": {
     "button": "Filters",
@@ -176,6 +180,10 @@
     "colors": "Colors",
     "price": "Price",
     "sort": "Sort",
+    "Previous": "Previous",
+    "Next": "Next",
+    "of": "of",
+
     "noResults": "No results found",
     "category": {
       "title": "Categories",

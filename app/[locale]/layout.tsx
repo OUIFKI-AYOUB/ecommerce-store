@@ -36,9 +36,11 @@ async function getMessages(locale: string) {
   try {
     return (await import(`../../messages/${locale}.json`)).default;
   } catch (error) {
-    notFound();
+    console.error(`⚠️ Messages introuvables pour la langue : ${locale}`);
+    return {}; // Évite une erreur en retournant un objet vide
   }
 }
+
 
 export default async function LocaleLayout({
   children,
@@ -50,8 +52,8 @@ export default async function LocaleLayout({
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-y-auto`}>
+<html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+<body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-y-auto`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ClientLayout>
@@ -62,8 +64,9 @@ export default async function LocaleLayout({
               <main className="flex-grow pt-16">
                 {children}
               </main>
-              <Footer />
-            </ClientLayout>
+              <div dir="ltr">
+                <Footer />
+              </div>            </ClientLayout>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

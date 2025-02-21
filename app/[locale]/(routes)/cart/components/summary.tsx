@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import FormCod from "./form-cod";
-import { useTranslations } from 'next-intl';
+import { useTranslations,useLocale } from 'next-intl';
 
 const Summary = () => {
     const [paymentMethod, setPaymentMethod] = useState<'CARD' | 'COD'>('COD');
@@ -19,6 +19,9 @@ const Summary = () => {
     const removeAll = useCart((state) => state.removeAll);
     const [isProcessing, setIsProcessing] = useState(false);
     const t = useTranslations('cart');
+
+            const locale = useLocale();
+    
 
     useEffect(() => {
         const success = searchParams.get("success");
@@ -136,7 +139,7 @@ const Summary = () => {
                 <div className="mt-6 space-y-4">
                     <div className="flex flex-col space-y-2">
                         <label className="text-sm font-medium">{t('paymentMethod')}:</label>
-                        <div className="flex space-x-4">
+                        <div className={`flex space-x-4 ${locale === 'ar' ? 'space-x-reverse' : ''}`}>
 
                         <label className="flex items-center gap-2 mb-4 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm"
                             >
@@ -146,7 +149,7 @@ const Summary = () => {
                                     value="COD"
                                     checked={paymentMethod === 'COD'}
                                     onChange={(e) => setPaymentMethod(e.target.value as 'CARD' | 'COD')}
-                                    className="mr-2"
+                                    className={`${locale === 'ar' ? 'ml-2' : 'mr-2'}`}
                                 />
                                 {t('cashOnDelivery')}
                             </label>
@@ -159,7 +162,7 @@ const Summary = () => {
                                     value="CARD"
                                     checked={paymentMethod === 'CARD'}
                                     onChange={(e) => setPaymentMethod(e.target.value as 'CARD' | 'COD')}
-                                    className="mr-2"
+                                    className={`${locale === 'ar' ? 'ml-2' : 'mr-2'}`}
                                 />
                                 {t('payWithCard')}
                             </label>

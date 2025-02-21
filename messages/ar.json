@@ -20,6 +20,8 @@
     "selectedColor": "اللون المختار",
     "availableQuantity": "الكمية المتوفرة",
     "none": "لا شيء",
+    "RELATED_PRODUCTS": "منتجات ذات صلة",
+
     "alerts": {
       "selectSize": "يرجى اختيار المقاس و اللون قبل الإضافة إلى السلة",
       "selectColor": "يرجى اختيار اللون قبل الإضافة إلى السلة",
@@ -70,7 +72,7 @@
   "delivery": {
     "fastDelivery": {
       "title": "توصيل سريع",
-      "description": "توصيل سريع وآمن"
+      "description":   " توصيل سريع وآمن لجميع المدن المغربية "
     },
     "payment": {
       "title": "الدفع عند الاستلام وعبر الإنترنت",
@@ -146,14 +148,18 @@
   "mobile-nav": {
     "Home": "الرئيسية",
     "AllProducts": "جميع المنتجات",
-    "NewArrivals": "المنتجات الجديدة"
+    "NewArrivals": "المنتجات الجديدة",
+    "Search": "بحث...",
+    "Cancel": "الغاء"
 },
 
   "search": {
     "title": "نتائج البحث",
     "description": "نتائج البحث عن المنتجات",
     "resultsFor": "نتائج البحث عن \"{query}\"",
-    "noResults": "لم يتم العثور على منتجات."
+    "noResults": "لم يتم العثور على منتجات.",
+    "SearchProdudcts": "بحث عن منتجات"
+
   },
   "filters": {
     "button": "تصفية",
@@ -162,6 +168,9 @@
     "price": "السعر",
     "sort": "ترتيب",
     "noResults": "لا توجد نتائج",
+    "Previous": "السابق",
+    "of": "من",
+    "Next": "التالى",
     "category": {
       "title": "الفئات",
       "all": "جميع الفئات"

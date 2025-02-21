@@ -6,7 +6,7 @@ import { Product, Size, Color, MediaType } from "@/types";
 import Currency from "@/components/ui/currency";
 import IconButton from "@/components/ui/icon-button";
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { useTranslations } from 'next-intl';
+import { useTranslations,useLocale } from 'next-intl';
 
 interface CartItemProps {
     data: Product & {
@@ -21,6 +21,8 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
     const [quantity, setQuantity] = useState(data.quantity);
     const [message, setMessage] = useState<string | null>(null);
     const t = useTranslations('cart');
+        const locale = useLocale();
+    
 
     useEffect(() => {
         setQuantity(data.quantity);
@@ -125,21 +127,21 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
                     </div>
                 )}
             </div>
-            <div className="ml-4 flex flex-1 flex-col">
-                <div>
+            <div className={`${locale === 'ar' ? 'mr-4' : 'ml-4'} flex flex-1 flex-col`}>
+            <div>
                     <div className="flex justify-between text-base font-medium text-gray-900 dark:text-gray-100">
                         <div>
                             <h3>{data.name}</h3>
                             <div className="text-sm text-gray-500 dark:text-gray-400">
                                 {data.selectedSize && (
-                                    <span className="mr-4">{t('size')}: {data.selectedSize.name}</span>
+                                    <span className={`${locale === 'ar' ? 'ml-4' : 'mr-4'}`}>{t('size')}: {data.selectedSize.name}</span>
                                 )}
                                 {data.selectedColor && (
                                     <span className="flex items-center">
                                         {t('color')}: {data.selectedColor.name}
                                         <div
-                                            className="ml-2 w-4 h-4 rounded-full border border-gray-200 dark:border-gray-600"
-                                            style={{ backgroundColor: data.selectedColor.value }}
+                                className={`${locale === 'ar' ? 'mr-2' : 'ml-2'} w-4 h-4 rounded-full border border-gray-200 dark:border-gray-600`}
+                                style={{ backgroundColor: data.selectedColor.value }}
                                         />
                                     </span>
                                 )}
@@ -166,10 +168,10 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
                             </>
                         )}
                         {hasNoVariants && (
-                            <span className="mx-2 text-gray-600 dark:text-gray-300">{t('quantity')}: {quantity}</span>
+                            <span className={`${locale === 'ar' ? 'mx-8' : 'mx-5'} text-gray-600 dark:text-gray-300`}>{t('quantity')}: {quantity}</span>
                         )}
-                        <p className="text-gray-500 dark:text-gray-400 ml-4">
-                            {t('total')}: <Currency value={data.price * quantity} />
+            <p className={`${locale === 'ar' ? 'mr-8' : 'ml-8'} text-gray-500 dark:text-gray-400`}>
+            {t('total')}: <Currency value={data.price * quantity} />
                         </p>
                     </div>
                     <div className="flex">

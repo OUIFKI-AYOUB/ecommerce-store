@@ -11,6 +11,7 @@ import usePreviewModal from "@/hooks/use-preview-modal";
 import useCart from "@/hooks/use-cart";
 import useWishlist from "@/hooks/use-wishlist";
 import { useTranslations } from 'next-intl';
+import {useLocale } from 'next-intl';
 
 interface ProductCardProps {
   data: Product;
@@ -36,6 +37,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const router = useRouter();
   const wishlist = useWishlist();
   const t = useTranslations('product-card');
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
 
   // Get the first media item that's an image
   const firstImage = data?.media?.find(item => item.type === MediaType.IMAGE);
@@ -118,13 +121,13 @@ return (
       </div>
 
       {/* Description - Reduced spacing */}
-      <div className="space-y-1">
+      <div className={`space-y-1 ${isRTL ? 'rtl' : ''}`}>
         <p className="font-semibold text-sm sm:text-lg dark:text-gray-100 line-clamp-1">{data.name}</p>
         <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 line-clamp-1">{data.categories[0]?.name}</p>
       </div>
 
       {/* Price & Stock - Compact version */}
-      <div className="flex items-center justify-between ">
+      <div className={`flex items-center justify-between ${isRTL ? 'rtl' : ''}`}>
         <Currency value={data.price} />
         <span className={`text-[11.5px] sm:text-sm font-semibold ${
           data.colorSizeQuantities?.some(variant => variant.quantity > 0) || (data.quantity ?? 0) > 0

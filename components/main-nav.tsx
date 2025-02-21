@@ -48,8 +48,8 @@ const NavigationContent = ({ data, className, pathname }: { data: Category[], cl
 
     return (
         <nav className={cn("mx-6 flex flex-col space-y-2", className)}> 
-            <div className="flex items-center space-x-4 lg:space-x-6">
-                {firstLineRoutes.map((route) => (
+<div className="flex items-center space-x-4 rtl:space-x-reverse lg:space-x-6">
+{firstLineRoutes.map((route) => (
                     <Link
                         key={route.href}
                         href={route.href}

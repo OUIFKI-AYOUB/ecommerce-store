@@ -6,7 +6,8 @@ import { Tab } from "@headlessui/react";
 import Image from "next/image";
 
 interface GalleryTabProps {
-    mediaItem: Media
+    mediaItem: Media,
+    
 }
 
 const GalleryTab: React.FC<GalleryTabProps> = ({

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CartItem from "./components/cart-item";
 import Summary from "./components/summary";
 import { useTranslations } from 'next-intl';
+import {useLocale } from 'next-intl';
 
 
 
@@ -17,6 +18,8 @@ const CartPage = () => {
   const [isMounted, setIsMounted] = useState(false)
   const cart = useCart()
   const t = useTranslations('cart');
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
 
   useEffect(() => {
     setIsMounted(true)
@@ -29,7 +32,7 @@ const CartPage = () => {
   return (
     <div className="bg-white dark:bg-black min-h-screen">
       <Container>
-        <div className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className={`px-4 py-16 sm:px-6 lg:px-8 ${isRTL ? 'rtl' : ''}`}>
           <h1 className="text-3xl font-bold text-black dark:text-white">
             {t('title')}
           </h1>

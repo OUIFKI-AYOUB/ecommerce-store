@@ -62,7 +62,8 @@ const HomePage = async () => {
                 href="/new-arrivals"
                 className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
               >
-                {t('shopCollection')} →
+                {t('shopCollection')}      <span className="rtl:transform rtl:rotate-180 rtl:mr-2">→</span>
+
               </Link>
             </div>
             <ProductSlider products={newProducts} />
@@ -89,7 +90,7 @@ const HomePage = async () => {
                     href={`/category/${category.id}`}
                     className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
                   >
-                    {t('shopCollection')} →
+                    {t('shopCollection')} <span className="rtl:transform rtl:rotate-180 rtl:mr-2">→</span>
                   </Link>
                 </div>
                 <ProductSlider 

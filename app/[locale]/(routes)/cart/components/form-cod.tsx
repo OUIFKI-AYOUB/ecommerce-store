@@ -7,7 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import useCart from "@/hooks/use-cart";
 import { X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface FormCodProps {
   onClose: () => void;
@@ -17,6 +17,7 @@ interface FormCodProps {
 const FormCod: React.FC<FormCodProps> = ({ onClose, items }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const t = useTranslations('codForm');
+            const locale = useLocale();
 
 
     const [formData, setFormData] = useState({
@@ -92,7 +93,8 @@ const FormCod: React.FC<FormCodProps> = ({ onClose, items }) => {
         <div className="relative">
             <button 
                 onClick={onClose}
-                className="absolute right-0 top-0 p-2"
+                className={`${locale === 'ar' ? 'left-0' : 'right-0'} absolute top-0 p-2`}
+
             >
                 <X size={24} />
             </button>
@@ -140,7 +142,9 @@ const FormCod: React.FC<FormCodProps> = ({ onClose, items }) => {
                 onChange={handleCityChange}
                 required
             />
-            <label htmlFor="other" className="ml-2">{t('allCities')}</label>
+            <label htmlFor="other"                         
+          className={`${locale === 'ar' ? 'mr-2' : 'ml-2'}`}
+            >{t('allCities')}</label>
         </div>
         <div>
             <input
@@ -152,7 +156,9 @@ const FormCod: React.FC<FormCodProps> = ({ onClose, items }) => {
                 onChange={handleCityChange}
                 required
             />
-            <label htmlFor="tanger" className="ml-2">Tanger (20 MAD)</label>
+            <label htmlFor="tanger"  
+          className={`${locale === 'ar' ? 'mr-2' : 'ml-2'}`}
+            >Tanger (20 MAD)</label>
         </div>
     </div>
 </div>

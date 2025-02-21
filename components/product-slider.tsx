@@ -4,6 +4,7 @@ import { Product } from "@/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef, TouchEvent, useEffect } from "react";
 import ProductCard from "./ui/product-card";
+import { useLocale } from "next-intl";
 
 interface ProductSliderProps {
   title?: string;
@@ -17,7 +18,8 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   const [startY, setStartY] = useState(0);
   const [imagesPerView, setImagesPerView] = useState(4);
   const sliderRef = useRef<HTMLDivElement>(null);
-
+  const locale = useLocale();
+  const isRTL = locale === 'ar';
   useEffect(() => {
     const updateImagesPerView = () => {
       if (window.innerWidth >= 1024) setImagesPerView(4); // lg
@@ -79,7 +81,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" dir={isRTL ? 'rtl' : 'ltr'}>
       <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">{title}</h2>
       <div
         className="overflow-hidden touch-pan-y"
@@ -90,7 +92,10 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
       >
         <div
           className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentIndex * (100 / imagesPerView)}%)` }}
+          style={{ 
+            transform: `translateX(${isRTL ? '' : '-'}${currentIndex * (100 / imagesPerView)}%)`,
+            direction: isRTL ? 'rtl' : 'ltr'
+          }}
         >
           {products.map((product) => (
             <div
@@ -105,22 +110,30 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
 
       <button
         onClick={prevSlide}
-        className="absolute left-2 top-1/2 -translate-y-1/2 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className={`absolute ${isRTL ? 'right-2' : 'left-2'} top-1/2 -translate-y-1/2 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}
         disabled={currentIndex === 0}
       >
-        <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600" />
+        {isRTL ? (
+          <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
+        ) : (
+          <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600" />
+        )}
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-2 top-1/2 -translate-y-1/2 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className={`absolute ${isRTL ? 'left-2' : 'right-2'} top-1/2 -translate-y-1/2 shadow-lg dark:shadow-gray-900 rounded-full p-3 z-10 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}
         disabled={currentIndex === totalSlides}
       >
-        <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
+        {isRTL ? (
+          <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600" />
+        ) : (
+          <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
+        )}
       </button>
 
       {/* Dots Navigation */}
-      <div className="flex justify-center mt-4 space-x-1.5">
+      <div className="flex justify-center mt-4 space-x-1.5 rtl:space-x-reverse">
         {Array.from({ length: totalSlides + 1 }).map((_, idx) => (
           <button
             key={idx}

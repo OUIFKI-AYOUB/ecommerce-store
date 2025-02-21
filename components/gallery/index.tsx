@@ -5,7 +5,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
 import { cn } from "@/lib/utils";
-
+import { useLocale } from 'next-intl';
 const MediaType = {
   IMAGE: "IMAGE",
   VIDEO: "VIDEO"
@@ -64,6 +64,8 @@ const Gallery = ({ media }: GalleryProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+    const locale = useLocale();
+    const isRTL = locale === 'ar';
 
   const nextMedia = () => {
     setSelectedIndex((prevIndex) => (prevIndex + 1) % media.length);
@@ -84,6 +86,8 @@ const Gallery = ({ media }: GalleryProps) => {
     setZoomedImage(null);
     document.body.style.overflow = 'unset'; // Re-enable scrolling
   };
+
+
 
   return (
     <>
@@ -132,21 +136,21 @@ const Gallery = ({ media }: GalleryProps) => {
               style={{ touchAction: 'manipulation' }}
               type="button"
             >
-              <ChevronLeft size={24} className="text-pink-600 dark:text-pink-600" />
-            </button>
+    <ChevronLeft size={24} className={`text-pink-600 dark:text-pink-600 ${isRTL ? 'rotate-180' : ''}`} />
+    </button>
             <button
               onClick={nextMedia}
               className="p-2 -m-[10px]  shadow  rounded-full  text-gray-800 hover:bg-white dark:hover:bg-gray-800 focus:outline-none pointer-events-auto"
               style={{ touchAction: 'manipulation' }}
               type="button"
             >
-              <ChevronRight size={24} className="text-pink-600 dark:text-pink-600" />
-            </button>
+    <ChevronRight size={24} className={`text-pink-600 dark:text-pink-600 ${isRTL ? 'rotate-180' : ''}`} />
+    </button>
           </div>
         </div>
 
         <TabList className="mx-auto mt-6 h-[95%] w-[95%] max-w-2xl lg:max-w-none">
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-4 gap-6" >
             {media.map((item) => (
               <GalleryTab key={item.id} mediaItem={item} />
             ))}

@@ -2,6 +2,7 @@
 import { Product } from "@/types";
 import Container from "@/components/ui/container";
 import ProductCard from "@/components/ui/product-card";
+import { getTranslations } from "next-intl/server"; 
 
 const getSearchResults = async (query: string): Promise<Product[]> => {
   try {
@@ -32,7 +33,7 @@ export default async function SearchPage({
 }) {
   const { query } = searchParams;
   const allProducts = await getSearchResults(query);
-
+  const t = await getTranslations("search");
   // Filter products to only include those with names that contain the search query
   const filteredProducts = allProducts.filter(product => 
     product.name.toLowerCase().includes(query.toLowerCase())
@@ -41,9 +42,9 @@ export default async function SearchPage({
   return (
     <Container>
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold pt-6 ">Search Results for "{query}"</h1>
+        <h1 className="text-3xl font-bold pt-6 "> {t("resultsFor", { query })}</h1>
         {filteredProducts.length === 0 ? (
-          <p>No products found.</p>
+          <p>{t("noResults")}</p> 
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-6">
             {filteredProducts.map((product) => (

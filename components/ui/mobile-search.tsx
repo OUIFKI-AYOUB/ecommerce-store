@@ -3,12 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from 'next-intl';
 
 const MobileSearch = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations('mobile-nav');
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -46,7 +48,7 @@ const MobileSearch = () => {
           <div className="flex items-center gap-2">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder={t('Search')}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="flex-1 border dark:border-gray-700 p-2 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-400 dark:focus:ring-pink-400"
@@ -57,7 +59,7 @@ const MobileSearch = () => {
               onClick={() => setIsOpen(false)}
               className="p-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
             >
-              Cancel
+              {t('Cancel')}
             </button>
           </div>
         </form>

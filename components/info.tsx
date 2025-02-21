@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Product, Size, Color } from "@/types";
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import useCart from "@/hooks/use-cart";
-import { useTranslations } from 'next-intl';
+import { useTranslations,useLocale } from 'next-intl';
 import { HtmlContent } from "@/components/ui/html-content";
 
 interface InfoProps {
@@ -23,6 +23,7 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
     const [message, setMessage] = useState<string | null>(null);
     const cart = useCart();
     const t = useTranslations('product');
+    const locale = useLocale();
 
     const hasSizes = data.sizes.length > 0;
     const hasColors = data.colors.length > 0;
@@ -117,12 +118,21 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
         if (options.length === 0) return null;
 
         return (
-            <div className="mb-4">
-                <h3 className="text-sm font-semibold mb-2 dark:text-gray-200">
+            <div className="mb-4 " >
+                <h3 className="text-sm font-semibold mb-2 dark:text-gray-200 rtl:text-right " >
                     {type === 'size' ? t('chooseSize') : t('chooseColor')}
+
+                    
                 </h3>
-                <div className={`flex ${type === 'size' ? 'flex-wrap gap-2' : 'space-x-2'}`}>
-                    {options.map((option) => {
+                <div
+  className={`flex ${
+    type === 'size'
+      ? 'flex-wrap gap-2'
+      : locale === 'ar'
+      ? 'space-x-2 rtl:space-x-reverse'
+      : 'space-x-2'
+  }`}
+>                    {options.map((option) => {
                         const isAvailable = type === 'size'
                             ? !option.isOutOfStock && getQuantityForOption(option, type) > 0
                             : !option.isOutOfStock && getQuantityForOption(option, type) > 0;
@@ -192,23 +202,31 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
         const availableQuantity = getAvailableQuantity();
 
         return (
-            <div className="flex items-center space-x-2 mb-4">
-                <h3 className="text-sm font-semibold dark:text-gray-200">
-                    {t('quantity')}
+            <div className="flex items-center space-x-2 mb-4 " >
+  <h3 className="text-sm font-semibold dark:text-gray-200 mr-2 rtl:ml-2 rtl:mr-0">
+  {t('quantity')}
                 </h3>
-                <div className="flex items-center space-x-1">
-                    <Button
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <Button
                         size="sm"
                         variant="outline"
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                         disabled={quantity <= 1}
-                        className="focus:bg-pink-500 focus:text-white dark:border-gray-600 dark:text-gray-200"
+                        className="focus:bg-pink-600 focus:text-white dark:border-gray-600 dark:text-gray-200"
                     >
                         <Minus size={16} />
                     </Button>
-                    <span className="text-sm font-semibold mx-2 dark:text-gray-200">{quantity}</span>
+                    <input
+  type="text"
+  value={quantity}
+  onChange={(e) => {
+    const newQuantity = Math.max(1, Math.min(availableQuantity, Number(e.target.value)));
+    setQuantity(newQuantity);
+}}      className="w-8 text-center rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200"
+
+/>                    
                     <Button
-                        className="focus:bg-pink-500 focus:text-white dark:border-gray-600 dark:text-gray-200"
+                        className="focus:bg-pink-600 focus:text-white dark:border-gray-600 dark:text-gray-200"
                         size="sm"
                         variant="outline"
                         onClick={() => setQuantity(Math.min(availableQuantity, quantity + 1))}
@@ -222,11 +240,11 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <div>
-                <h1 className="text-2xl font-bold text-primary dark:text-gray-100">{data.name}</h1>
+                <h1 className="text-2xl font-bold text-primary dark:text-gray-100 rtl:text-right">{data.name}</h1>
                 <div className="mt-2">
-                    <p className="text-xl text-gray-900 dark:text-gray-100">
+                    <p className="text-xl text-gray-900 dark:text-gray-100 rtl:text-right">
                         <Currency value={data?.price} />
                     </p>
                 </div>
@@ -239,7 +257,7 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
             {renderQuantityControl()}
 
             <div className="space-y-4">
-                <div className="relative inline-block">
+                <div className="relative inline-block rtl:ml-[300px]">
                     <Button
                         size="sm"
                         className="px-6 py-4 text-sm font-semibold text-white bg-pink-600 
@@ -247,14 +265,14 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
     dark:hover:bg-gray-800 dark:hover:text-white 
     border border-pink-600 hover:border-black dark:hover:border-gray-600 
     dark:bg-pink-700 dark:border-pink-700
-    transition-colors"
+    transition-colors "
                         onClick={handleAddToCart}
                         disabled={isCompletelyOutOfStock()}
                     >
                         {t('addToCart')}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 ml-2"
+                            className={`h-4 w-4 ${locale === 'ar' ? 'mr-2' : 'ml-2'}`}
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -274,15 +292,15 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
         variant={message.includes(t('alerts.addedToCart')) ? "default" : "destructive"}
         className={`dark:bg-gray-800 dark:border-gray-700 ${
             message === t('alerts.selectSize') || message === t('alerts.selectColor')
-                ? 'dark:text-red-400'
+                ? 'dark:text-red-400 rtl:text-right'
                 : ''
         }`}
     >
 <AlertDescription 
             className={`${
                 (message === t('alerts.selectSize') || message === t('alerts.selectColor'))
-                ? 'dark:text-red-400 text-red-600'
-                : 'dark:text-gray-200'
+                ? 'dark:text-red-400 text-red-600 rtl:text-right'
+                : 'dark:text-gray-200 rtl:text-right'
             }`}
         >            {message}
         </AlertDescription>
@@ -290,7 +308,7 @@ const Info: React.FC<InfoProps> = ({ data , showDescription = true  }) => {
 )}
 
 
-                <div className="text-xs text-gray-600 dark:text-gray-400">
+                <div className="text-xs text-gray-600 dark:text-gray-400 rtl:text-right">
                     {hasSizes && (
                         <p>{t('selectedSize')} {selectedSize?.name || t('none')}</p>
                     )}
