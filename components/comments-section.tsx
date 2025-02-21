@@ -53,14 +53,16 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
     const diffX = startX - currentX;
     const diffY = startY - currentY;
 
+
+    const adjustedDiffX = isRTL ? -diffX : diffX;
+
     // Check if the movement is primarily horizontal
     if (Math.abs(diffX) > Math.abs(diffY)) {
-      e.preventDefault(); // Prevent vertical scrolling during horizontal swipe
+      e.preventDefault();
       if (Math.abs(diffX) > 50) {
-        // Reduced threshold for swipe detection
-        if (diffX > 0 && currentIndex < totalSlides) {
+        if (adjustedDiffX > 0 && currentIndex < totalSlides) {
           setCurrentIndex((prev) => prev + 1);
-        } else if (diffX < 0 && currentIndex > 0) {
+        } else if (adjustedDiffX < 0 && currentIndex > 0) {
           setCurrentIndex((prev) => prev - 1);
         }
         setIsDragging(false);

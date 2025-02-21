@@ -13,9 +13,7 @@ interface ProductPageProps {
     }
 }
 
-const ProductPage: React.FC<ProductPageProps> = async ({
-    params
-}) => {
+const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
     const product = await getProduct(params.productId);
     const locale = useLocale();
     const isRTL = locale === 'ar';
@@ -24,7 +22,6 @@ const ProductPage: React.FC<ProductPageProps> = async ({
         categoryId: product.categories[0]?.id,
     });
 
-    // Filter out the current product from suggested products
     const filteredSuggestedProducts = suggestedProducts.filter(
         (suggestedProduct) => suggestedProduct.id !== params.productId
     );
@@ -32,22 +29,27 @@ const ProductPage: React.FC<ProductPageProps> = async ({
     return (
         <div className="bg-white dark:bg-gray-900 min-h-screen">
             <Container>
-                <div className="px-4 py-10 sm:px-6 lg:px-8">
-                    <div className={`lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 ${isRTL ? 'rtl' : ''}`}>
-                        <Gallery media={product.media}/>
-                        <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-                            <Info data={product} />
+                <div className="px-2 py-6 md:px-4 md:py-10">
+                <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+                <div className="w-full">
+                            <Gallery media={product.media}/>
+                        </div>
+                        <div className="mt-8 lg:mt-0 w-full">
+                            <div className="px-2 md:px-4">
+                                <Info data={product} />
+                            </div>
                         </div>
                     </div>
-                    <hr className="my-10 border-gray-200 dark:border-gray-700" />
+                    <hr className="my-8 md:my-10 border-gray-200 dark:border-gray-700" />
                     <ProductPageClient
-            filteredSuggestedProducts={filteredSuggestedProducts}
-            isRTL={isRTL}
-          />
+                        filteredSuggestedProducts={filteredSuggestedProducts}
+                        isRTL={isRTL}
+                    />
                 </div>
             </Container>
         </div>
     );
 }
+
 
 export default ProductPage;
