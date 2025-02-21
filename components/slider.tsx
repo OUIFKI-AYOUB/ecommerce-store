@@ -12,7 +12,7 @@ const Slider: React.FC<SliderProps> = ({ billboards }) => {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState<number>(0);
   const [touchEnd, setTouchEnd] = useState<number>(0);
-  const isRTL = document.dir === 'rtl';
+  const isRTL = typeof document !== 'undefined' ? document.dir === 'rtl' : false;
 
   const minSwipeDistance = 50;
 

@@ -119,6 +119,21 @@
     "Cancel": "Cancel"
 },
 
+"use-cart": {
+    "productOutOfStock": "This product is currently out of stock",
+    "sorry": "Sorry, only",
+    "left":"of this product are left",
+    "available":" of this product are available",
+
+    "updatedqty": " Product quantity has been updated in the shopping cart",
+    "addproduct": "Product added to the shopping cart",
+    "removecart": "Product removed from the shopping cart",
+    "notfound": "Product not found in the shopping cart",
+    "productupdate":"Product quantity updated"
+
+
+},
+
   "success": {
     "card": {
       "title": "Payment Successful!",

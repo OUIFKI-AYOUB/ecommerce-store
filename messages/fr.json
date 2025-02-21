@@ -113,6 +113,18 @@
     "processing": "Traitement en cours...",
     "fillFields": "Veuillez remplir tous les champs"
 },
+"use-cart": {
+    "productOutOfStock": "Ce produit est actuellement en rupture de stock",
+    "sorry": "Désolé, il ne reste que",
+    "left": "de ce produit",
+    "available": "de ce produit sont disponibles",
+
+    "updatedqty": "La quantité du produit a été mise à jour dans le panier",
+    "addproduct": "Produit ajouté au panier",
+    "removecart": "Produit retiré du panier",
+    "notfound": "Produit non trouvé dans le panier",
+    "productupdate": "Quantité du produit mise à jour"
+},
   "success": {
     "card": {
       "title": "Paiement réussi !",

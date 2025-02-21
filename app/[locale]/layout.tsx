@@ -66,7 +66,8 @@ export default async function LocaleLayout({
               </main>
               <div dir="ltr">
                 <Footer />
-              </div>            </ClientLayout>
+              </div>           
+               </ClientLayout>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

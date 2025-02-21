@@ -45,7 +45,7 @@ const Modal: React.FC<ModalProps> =({
                 <div className={`${locale === "ar" ? "left-4" : "right-4"} absolute top-4`}>
                 <IconButton 
     onClick={onClose} 
-    icon={<X size={15} className="dark:text-gray-200" />} 
+    icon={<X size={20} className="dark:text-gray-200" />} 
     className="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition rounded-full p-1"
     aria-label="Close modal"
 />
