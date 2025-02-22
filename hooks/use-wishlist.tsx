@@ -20,15 +20,21 @@ const useWishlist = create(
         const existingItem = currentItems.find((item) => item.id === data.id);
 
         if (existingItem) {
-          return toast("Item already in wishlist.");
+          return toast("العنصر موجود في قائمة الرغبات.");
         }
 
         set({ items: [...get().items, data] });
-        toast.success("Item added to wishlist.");
+        toast.success("تمت إضافة العنصر إلى قائمة الرغبات.");
       },
       removeItem: (id: string) => {
         set({ items: [...get().items.filter((item) => item.id !== id)] });
-        toast.success("Item removed from wishlist.");
+        toast.success("تمت إزالة العنصر من قائمة الرغبات.");
+
+
+
+
+
+
       },
       removeAll: () => set({ items: [] }),
     }),

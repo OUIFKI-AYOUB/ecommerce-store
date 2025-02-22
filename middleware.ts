@@ -5,10 +5,8 @@ export default createMiddleware({
   defaultLocale: 'ar',
   localePrefix: 'always',
   // Redirect /en to /ar
-  localeDetection: false, // Disable automatic locale detection
 });
 
-// Optional: Add a redirect in your Next.js config
 const nextConfig = {
   async redirects() {
     return [

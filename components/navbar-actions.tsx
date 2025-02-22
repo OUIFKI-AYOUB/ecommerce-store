@@ -30,7 +30,7 @@ const NavbarActions = () => {
       <div 
         onClick={() => router.push("/wishlist")} 
         className={cn(
-          "relative cursor-pointer transition-colors duration-200",
+          "relative cursor-pointer transition-colors duration-200 lg:flex hidden",
           pathname.includes('/wishlist') 
             ? "text-pink-600 dark:text-pink-500" 
             : "text-black dark:text-white hover:text-pink-600 dark:hover:text-pink-500"
