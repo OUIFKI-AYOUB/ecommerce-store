@@ -25,8 +25,7 @@ const Navbar = async () => {
         <MobileNav data={categories} />
             <LanguageSwitcher />
           </div>
-
-          <Link href="/" className="lg:static lg:transform-none lg:left-0 absolute left-1/2 transform -translate-x-1/2 rtl:left-[54%]">
+          <Link href="/" className="lg:static lg:transform-none lg:left-0 absolute left-1/2 transform -translate-x-1/2">
           <Image
               src="/images/mat.png"
               alt="Logo"
