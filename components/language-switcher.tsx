@@ -35,6 +35,12 @@ export default function LanguageSwitcher() {
       />
       {isOpen && (
         <div className="absolute top-full mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                    <button
+            onClick={() => handleLanguageChange('ar')}
+            className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            العربية
+          </button>
           <button
             onClick={() => handleLanguageChange('en')}
             className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -47,12 +53,7 @@ export default function LanguageSwitcher() {
           >
             Français
           </button>
-          <button
-            onClick={() => handleLanguageChange('ar')}
-            className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            العربية
-          </button>
+
         </div>
       )}
     </div>

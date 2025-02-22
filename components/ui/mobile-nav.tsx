@@ -65,7 +65,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
       {/* Sidebar */}
       <div 
        className={cn(
-        "fixed top-0 h-full w-[280px] bg-white dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50 overflow-auto",
+        "fixed top-0 h-full w-[290px] bg-white dark:bg-gray-900 shadow-lg transform transition-transform duration-300 ease-in-out z-50 overflow-auto",
         isOpen ? "translate-x-0" : "translate-x-full",
         "rtl:right-0 rtl:left-auto ltr:left-0 ltr:right-auto", // Dynamic positioning for RTL and LTR
         !isOpen && "rtl:translate-x-full ltr:-translate-x-full" // Dynamic transform for RTL and LTR

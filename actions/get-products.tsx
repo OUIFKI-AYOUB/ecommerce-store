@@ -95,7 +95,6 @@ const getProducts = async (query: Query): Promise<Product[]> => {
   });
   const res = await fetch(url, {
     cache: 'no-store',
-    next: { revalidate: 0 }
   });
 
   let products: Product[] = await res.json();
