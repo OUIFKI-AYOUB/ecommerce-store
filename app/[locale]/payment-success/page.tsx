@@ -125,7 +125,7 @@ const SuccessPage = () => {
                   {step.icon}
                 </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">
+                  <h3 className="font-medium text-gray-900 dark:text-white rtl:text-right">
                     {step.title}
                   </h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
