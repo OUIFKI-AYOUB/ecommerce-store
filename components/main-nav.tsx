@@ -43,8 +43,8 @@ const NavigationContent = ({ data, className, pathname }: { data: Category[], cl
 
     const allRoutes = [...mainRoutes, ...categoryRoutes];
 
-    const firstLineRoutes = allRoutes.slice(0, 7);
-    const secondLineRoutes = allRoutes.slice(7);
+    const firstLineRoutes = allRoutes.slice(0, 6);
+    const secondLineRoutes = allRoutes.slice(6);
 
     return (
         <nav className={cn("mx-6 flex flex-col space-y-2", className)}> 

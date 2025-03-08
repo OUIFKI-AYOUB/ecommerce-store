@@ -82,8 +82,12 @@ const MobileNav: React.FC<MobileNavProps> = ({ data }) => {
           <MobileSearch onSearch={() => setIsOpen(false)} />
           </div>
           <div 
-        onClick={() => router.push("/wishlist")} 
-        className={cn(
+            onClick={() => {
+              router.push("/wishlist");
+              setIsOpen(false); 
+            }}   
+            
+            className={cn(
           "relative cursor-pointer transition-colors duration-200",
           pathname.includes('/wishlist') 
             ? "text-pink-600 dark:text-pink-500" 

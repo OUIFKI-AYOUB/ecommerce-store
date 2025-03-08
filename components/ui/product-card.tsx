@@ -75,9 +75,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 return (
     <div 
       onClick={handleClick} 
-      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border hover:scale-105 duration-500 transition-transform dark:border-gray-700 p-3 space-y-3 transition-colors duration-300  sm:hover:bg-pink-500  sm:dark:hover:bg-pink-600"
+      className="bg-white dark:bg-gray-800 group cursor-pointer rounded-xl border hover:scale-105 duration-500 transition-transform dark:border-gray-700 p-[7px] space-y-2 transition-colors duration-300  sm:hover:bg-pink-500  sm:dark:hover:bg-pink-600"
     >      
-      <div className="aspect-[4/5] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
+      <div className="aspect-[3/4] sm:aspect-square rounded-xl bg-gray-100 dark:bg-gray-900 relative">
         {/* Wishlist button */}
         <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
           <div className='absolute top-0 left-0 z-10'>
@@ -99,7 +99,7 @@ return (
             src={firstImage.url}
             alt={data.name}
             fill
-            className="aspect-[4/5] sm:aspect-square object-cover rounded-md hover:scale-105 duration-500 transition-transform"
+            className="object-cover rounded-md md:hover:scale-105 duration-500 transition-transform"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -122,14 +122,34 @@ return (
 
       {/* Description - Reduced spacing */}
       <div className={`space-y-1 ${isRTL ? 'rtl' : ''}`}>
-        <p className="font-semibold text-sm sm:text-lg dark:text-gray-100 line-clamp-1">{data.name}</p>
-        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 line-clamp-1">{data.categories[0]?.name}</p>
+        <p className="font-semibold text-sm sm:text-lg dark:text-gray-100 line-clamp-1">
+          {data.name}
+        </p>
+        <div className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 line-clamp-1">
+          {data.categories.map((category, index) => (
+            <span key={category.id}>
+              {category.name}
+              {index < data.categories.length - 1 && ', '}
+            </span>
+          ))}
+          
+        </div>
       </div>
+
+    
 
       {/* Price & Stock - Compact version */}
       <div className={`flex items-center justify-between ${isRTL ? 'rtl' : ''}`}>
-        <Currency value={data.price} />
-        <span className={`text-[11.5px] sm:text-sm font-semibold ${
+      <div className="flex items-center space-x-1 rtl:space-x-reverse">
+     
+          <span className="text-base max-sm:text-[15px]  font-semibold"><Currency value={data.price} /></span>
+          {data.originalPrice && (
+            <div className="text-base max-sm:text-[8.5px]  text-red-400 dark:text-red-300 line-through ">
+              <Currency value={data.originalPrice} />
+            </div>
+          )}
+        </div>
+                    <span className={`text-[12px] sm:text-sm font-semibold ${
           data.colorSizeQuantities?.some(variant => variant.quantity > 0) || (data.quantity ?? 0) > 0
             ? 'text-green-500'
             : 'text-red-500'

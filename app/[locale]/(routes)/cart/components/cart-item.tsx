@@ -21,6 +21,8 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
     const [quantity, setQuantity] = useState(data.quantity);
     const [message, setMessage] = useState<string | null>(null);
     const t = useTranslations('cart');
+    const [isRemoving, setIsRemoving] = useState(false); // Add a loading state for removal
+
         const locale = useLocale();
     
 
@@ -98,17 +100,26 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
         }
     };
 
-    const onRemove = () => {
-        cart.removeItem(data.id, data.selectedSize, data.selectedColor);
+    const onRemove = async () => {
+        setIsRemoving(true); // Set loading state
+        try {
+            console.log("Removing item:", data.id, data.selectedSize, data.selectedColor);
+            await cart.removeItem(data.id, data.selectedSize, data.selectedColor); // Ensure this is async
+        } catch (error) {
+            console.error("Failed to remove item:", error);
+        } finally {
+            setIsRemoving(false); // Reset loading state
+        }
     };
 
-    // Find the first image from media array with fallback handling
+    // Find the media item that matches the selected color
     const primaryImage = data.media && Array.isArray(data.media)
-        ? data.media.find(m => m.type === MediaType.IMAGE)
-        : null;
+    ? data.media.find(m => m.type === MediaType.IMAGE && m.colorId === data.selectedColor?.id) || data.media[0]
+    : null;
 
     // Fallback to first image from images array if media is not available
     const imageUrl = primaryImage?.url || (data as any).images?.[0]?.url;
+
 
     return (
         <li className="flex py-6 border-b dark:border-gray-700">
@@ -175,12 +186,12 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
                         </p>
                     </div>
                     <div className="flex">
-                        <IconButton
+                          <IconButton
                             className="ml-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                             onClick={onRemove}
+                            disabled={isRemoving} // Disable button while removing
                             icon={<Trash2 size={15} className="text-red-500 dark:text-red-400" />}
                         />
-
                     </div>
                 </div>
                 {message && (

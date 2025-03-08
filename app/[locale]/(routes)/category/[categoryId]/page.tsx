@@ -55,7 +55,6 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const allSizes = await getSizes();
   const allColors = await getColors();
 
-
   const availableSizes = allSizes.filter(size =>
     products.some(product => product.sizes?.some(pSize => pSize.id === size.id))
   );
@@ -63,7 +62,6 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const availableColors = allColors.filter(color =>
     products.some(product => product.colors?.some(pColor => pColor.id === color.id))
   );
-
 
   const category = await getCategory(params.categoryId);
 
@@ -80,21 +78,17 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
         </div>
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
-          {(availableSizes.length > 0 || availableColors.length > 0) && (
-  <DesktopFilters sizes={availableSizes} colors={availableColors} />
-)}
-          <div className="lg:col-span-4">
-  <div className="flex items-center justify-between mb-6">
-    <h2 className="text-2xl font-bold dark:text-white">{category.name}</h2>
-    <div className="flex items-center gap-x-2 lg:gap-x-4">
-      <div className="lg:ml-4">
-        <SortFilter />
-      </div>
-      {(availableSizes.length > 0 || availableColors.length > 0) && (
-  <MobileFilters sizes={availableSizes} colors={availableColors} />
-)}
-    </div>
-  </div>
+            <DesktopFilters sizes={availableSizes} colors={availableColors} />
+            <div className="lg:col-span-4">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold dark:text-white">{category.name}</h2>
+                <div className="flex items-center gap-x-2 lg:gap-x-4">
+                  <div className="lg:ml-4">
+                    <SortFilter />
+                  </div>
+                  <MobileFilters sizes={availableSizes} colors={availableColors} />
+                </div>
+              </div>
 
               {products.length === 0 ? (
                 <NoResults />

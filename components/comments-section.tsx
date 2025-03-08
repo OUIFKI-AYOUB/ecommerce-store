@@ -170,13 +170,13 @@ const CommentsSection: React.FC<CommentsSectionProps> = ({ comments }) => {
         )}
 
         {/* Dots Navigation */}
-        <div className="flex justify-center mt-3 md:mt-4 space-x-1.5 space-x-reverse">
+        <div className="flex justify-center mt-3 md:mt-4 space-x-1.5 rtl:space-x-reverse">
           {Array.from({ length: totalSlides + 1 }).map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
-                currentIndex === idx ? "bg-gray-800 w-3 md:w-4" : "bg-gray-300"
+                currentIndex === idx ? "bg-gray-800 dark:bg-white w-3 md:w-4" : "bg-gray-300"
               }`}
             />
           ))}

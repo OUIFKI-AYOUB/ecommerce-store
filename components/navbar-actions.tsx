@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { ModeToggle } from "./theme-toggle";
 import useWishlist from "@/hooks/use-wishlist";
 import { cn } from "@/lib/utils";
+import Currency from "./ui/currency";
 
 const NavbarActions = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -25,6 +26,11 @@ const NavbarActions = () => {
     return null
   }
 
+  const subtotal = cart.items.reduce((total, item) => {
+    return total + Number(item.price) * item.quantity;
+  }, 0);
+
+
   return (
     <div className="flex items-center justify-end gap-x-4 ml-auto">
       <div 
@@ -41,6 +47,9 @@ const NavbarActions = () => {
           {wishlist.items.length}
         </span>
       </div>
+
+
+      <div className="flex items-center gap-x-1">
 
       <div 
         onClick={() => router.push('/cart')} 
@@ -67,6 +76,12 @@ const NavbarActions = () => {
         </svg>
         <span className="absolute -top-2 -right-2 bg-black dark:bg-gray-100 text-white dark:text-gray-900 rounded-full w-4 h-4 flex items-center justify-center text-xs">
           {cart.items.length}
+        </span>
+      </div>
+
+              {/* Display the subtotal */}
+              <span className="max-sm:hidden  text-sm max-sm:text-[13px]  font-medium text-gray-700 dark:text-gray-300">
+          <Currency value={subtotal} />
         </span>
       </div>
 

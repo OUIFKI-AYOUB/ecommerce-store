@@ -23,7 +23,7 @@
     "RELATED_PRODUCTS": "Produits associés",
 
     "alerts": {
-      "selectSize": "Veuillez sélectionner une taille et une couleur avant d'ajouter au panier",
+      "selectSize": "Veuillez sélectionner une taille  avant d'ajouter au panier",
       "selectColor": "Veuillez sélectionner une couleur avant d'ajouter au panier",
       "limitedStock": "Seulement {count} articles disponibles",
       "addedToCart": "Article ajouté au panier avec succès!"
@@ -75,11 +75,15 @@
     "numberOfItems": "Nombre d'articles",
     "item": "article",
     "items": "articles",
+    "deliveryCost": "Frais de livraison",
+    "allCities": "Les autres villes (40 DH)",
     "orderTotal": "Total de la commande",
     "paymentMethod": "Choisir le mode de paiement",
     "payWithCard": "Payer par carte",
     "cashOnDelivery": "Paiement à la livraison",
     "processing": "Traitement en cours...",
+    "virement":" Virement bancaire",
+
     "emptyCart": "Panier vide",
     "placeOrder": "Commander (Paiement à la livraison)",
     "checkoutCard": "Payer par carte",
@@ -104,14 +108,43 @@
     "city": "Ville",
     "cityPlaceholder": "Entrez votre ville",
     "deliveryCost": "Frais de livraison",
-    "allCities": "Toutes les villes (40 MAD)",
+    "allCities": "Les autres villes marocaines (40 DH)",
     "address": "Adresse de livraison",
     "addressPlaceholder": "Entrez votre adresse de livraison",
+    "shopNow": "  Acheter Maintenant",
+
+    "accountNumberCopied": "Numéro de compte copié",
+    "ibanCopied": "IBAN copié",
+    "NameAccCopied": "Nom du titulaire du compte copié",
+
+
     "subtotal": "Sous-total",
     "total": "Total",
     "confirmOrder": "Confirmer la commande",
+    "sentorder": "Envoyer la commande",
+
     "processing": "Traitement en cours...",
-    "fillFields": "Veuillez remplir tous les champs"
+    "fillFields": "Veuillez remplir les champs nécessaire",
+    "NumNom": "Numéro et nom de rue",
+    "NumNomPlaceholder": "Entrez votre numéro et nom de rue",
+    "Batiment": "Bâtiment, appartement, résidence, quartier... (Optionnel)",
+    "BatimentPlaceholder": "Bâtiment, appartement, résidence, quartier...",
+    "Email": "Email (Optionnel)",
+    "EmailPlaceholder": "Entrez votre email ",
+    "virement":" Virement bancaire",
+    "iban":"Numéro IBAN",
+    "accountHolder":  "Nom du titulaire du compte" ,
+    "accountNumber":"Numéro de compte ", 
+    "bankDetails":"Informations du titulaire du compte",
+    "fieldRequired" : "Ce champ est obligatoire",
+    "Nomsentmoney":"Nom du titulaire du compte à partir duquel le transfert est effectué",
+    "acceptpay": "La demande est acceptée lorsque le virement bancaire est effectué",
+    "quantity": "Quantité",
+    "size": "Taille",
+    "color": "Couleur",
+    "noImage": "Pas d'image",
+    "orderSummary": "Récapitulatif de la commande"
+
 },
 "use-cart": {
     "productOutOfStock": "Ce produit est actuellement en rupture de stock",
@@ -141,26 +174,34 @@
         },
         "shipping": {
           "title": "Expédition prochaine",
-          "description": "Votre commande sera expédiée sous 24-48 heures"
+          "description": "Votre commande sera expédiée sous 24-72 heures"
         }
       }
     },
     "cod": {
       "title": "Commande passée avec succès!",
       "subtitle": "Merci d'avoir fait vos achats chez nous",
+      "sent": "Commande envoyée avec succès!",
+
       "continueButton": "Continuer vos achats",
       "steps": {
         "processing": {
           "title": "Traitement de la commande",
-          "description": "Votre commande est en cours de traitement par notre équipe"
+          "description": "Votre commande est en cours de traitement par notre équipe",
+          "descriptionsent": "Votre commande est en cours de traitement par notre équipe"
+
         },
         "confirmation": {
           "title": "Appel de confirmation",
-          "description": "Nous vous appellerons pour confirmer les détails de livraison"
+          "description": "Nous vous appellerons pour confirmer les détails de livraison",
+          "descriptionsent": "Nous vous appellerons pour confirmer les détails de livraison"
+
         },
         "delivery": {
           "title": "Livraison",
-          "description": "Payez en espèces à la réception de votre commande"
+          "description": "Payez en espèces à la réception de votre commande",
+          "descriptionsent": "Si le paiement est effectué, votre commande sera expédiée sous 24-72 heures"
+
         }
       }
     }

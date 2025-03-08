@@ -33,7 +33,7 @@ const HomePage = async () => {
 <div className="touch-auto ">
 <Container >
         <MotionDiv 
-          className="space-y-16 pb-10"
+          className="space-y-12 pb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -49,25 +49,27 @@ const HomePage = async () => {
             </MotionDiv>
           )}
 
-          <MotionDiv 
-            className="py-8"
-            initial={{ y: 50, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold">{t('newArrivals')}</h2>
-              <Link 
-                href="/new-arrivals"
-                className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
-              >
-                {t('shopCollection')}      <span className="rtl:transform rtl:rotate-180 rtl:mr-2">→</span>
+{newProducts.length > 0 && (
+            <MotionDiv 
+              className="py-8"
+              initial={{ y: 50, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-bold">{t('newArrivals')}</h2>
+                <Link 
+                  href="/new-arrivals"
+                  className="inline-flex items-center px-4 py-2 rounded-md bg-white dark:bg-white text-black dark:text-black hover:text-pink-600 dark:hover:text-pink-600 transition border border-gray-400 dark:border-gray-400 shadow-sm"
+                >
+                  {t('shopCollection')} <span className="rtl:transform rtl:rotate-180 rtl:mr-2">→</span>
+                </Link>
+              </div>
+              <ProductSlider products={newProducts} />
+            </MotionDiv>
+          )}
 
-              </Link>
-            </div>
-            <ProductSlider products={newProducts} />
-          </MotionDiv>
 
           {categories
             .filter(category => 

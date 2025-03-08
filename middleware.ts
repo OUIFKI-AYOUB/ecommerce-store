@@ -5,6 +5,7 @@ const middleware = createMiddleware({
   locales: ['ar', 'fr', 'en'],
   defaultLocale: 'ar',
   localePrefix: 'always',
+  
 });
 
 export default function (request: NextRequest) {

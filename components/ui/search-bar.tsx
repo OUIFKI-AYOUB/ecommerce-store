@@ -23,7 +23,7 @@ const SearchBar = () => {
 
   return (
     <form
-      className="flex items-center justify-center w-full max-w-md mx-auto" 
+      className="flex items-center justify-center w-96 max-w-md mx-auto" 
       onSubmit={handleSearch}
     >
       <div className="relative w-full">
@@ -31,7 +31,7 @@ const SearchBar = () => {
           type="text"
           name="name"
           placeholder= {t('SearchProdudcts')}
-          className="pl-5 pr-2 py-2 w-full"
+          className="pl-5 pr-2 py-3 w-full"
         />
       
         {/* Add the submit button */}

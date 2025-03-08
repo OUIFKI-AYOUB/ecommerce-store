@@ -23,7 +23,7 @@
     "RELATED_PRODUCTS": "منتجات ذات صلة",
 
     "alerts": {
-      "selectSize": "يرجى اختيار المقاس و اللون قبل الإضافة إلى السلة",
+      "selectSize": "يرجى اختيار المقاس  قبل الإضافة إلى السلة",
       "selectColor": "يرجى اختيار اللون قبل الإضافة إلى السلة",
       "limitedStock": "متوفر فقط {count} قطع",
       "addedToCart": "تمت إضافة المنتج إلى السلة بنجاح!"
@@ -49,11 +49,16 @@
     "numberOfItems": "عدد المنتجات",
     "item": "منتج",
     "items": "منتجات",
+    "deliveryCost": "تكلفة التوصيل",
+    "allCities": "باقي المدن المغربية (40 درهم)",
     "orderTotal": "إجمالي الطلب",
     "paymentMethod": "اختر طريقة الدفع",
     "payWithCard": "الدفع بالبطاقة",
     "cashOnDelivery": "الدفع عند الاستلام",
     "processing": "جاري المعالجة...",
+    "virement":"التحويل البنكي",
+    
+
     "emptyCart": "السلة فارغة",
     "placeOrder": "تأكيد الطلب (الدفع عند الاستلام)",
     "checkoutCard": "الدفع بالبطاقة",
@@ -96,14 +101,45 @@
     "city": "المدينة",
     "cityPlaceholder": "أدخل مدينتك",
     "deliveryCost": "تكلفة التوصيل",
-    "allCities": "جميع المدن (40 درهم)",
+    "allCities": "باقي  المدن (40 درهم)",
     "address": "عنوان التوصيل",
     "addressPlaceholder": "أدخل عنوان التوصيل",
     "subtotal": "المجموع الفرعي",
     "total": "المجموع الكلي",
     "confirmOrder": "تأكيد الطلب",
+    "accountNumberCopied": "رقم الحساب قد تم نسخه",
+    "ibanCopied": "رقم الآيبان قد تم نسخه",
+    "NameAccCopied": "اسم صاحب الحساب قد تم نسخه",
+
+    "shopNow": " اشترِ الآن ",
+
+    "sentorder": "إرسال الطلب",
     "processing": "جاري المعالجة...",
-    "fillFields": "يرجى ملء جميع الحقول"
+    "fillFields": "يرجى ملء الحقول الضرورية",
+    "NumNom": "إسم ورقم الشارع",
+    "NumNomPlaceholder": "أدخل اسم ورقم الشارع",
+    "Batiment": "مبنى، شقة، إقامة، حي...(اختياري)",
+    "BatimentPlaceholder": "أدخل  مبنى، شقة، إقامة، حي...",
+    "Email": "البريد الإلكتروني (اختياري)",
+    "EmailPlaceholder": "أدخل بريدك الإلكتروني",
+    "virement":"التحويل البنكي",
+    "iban":"IBAN رقم الآيبان ",
+    "accountHolder":  "اسم صاحب الحساب " ,
+    "accountNumber":"رقم الحساب", 
+    "bankDetails":"معلومات صاحب الحساب",
+    "fieldRequired": "هذا الحقل مطلوب",
+    "Nomsentmoney":"اسم صاحب الحساب الذي يتم التحويل منه",
+    "acceptpay":" يتم قبول الطلب عند إتمام التحويل البنكي",
+    "noImage": "لا توجد صورة",
+    "size": "المقاس",
+    "color": "اللون",
+    "quantity": "الكمية",
+    "orderSummary": "ملخص الطلب"
+
+
+
+
+
 },
   "success": {
     "card": {
@@ -121,26 +157,35 @@
         },
         "shipping": {
           "title": "الشحن قريباً",
-          "description": "سيتم شحن طلبك خلال 24-48 ساعة"
+          "description": "سيتم شحن طلبك خلال 24-72 ساعة"
         }
       }
     },
     "cod": {
       "title": "تم تأكيد طلبك بنجاح!",
       "subtitle": "شكراً للشراء من عندنا ",
+
+      "sent": "تم ارسال الطلب بنجاح!",
+
       "continueButton": "مواصلة التسوق",
       "steps": {
         "processing": {
           "title": "معالجة الطلب",
-          "description": "يتم معالجة طلبك من قبل فريقنا"
+          "description": "يتم معالجة طلبك من قبل فريقنا",
+          "descriptionsent": "يتم معالجة طلبك من قبل فريقنا"
+
         },
         "confirmation": {
           "title": "مكالمة التأكيد",
-          "description": "سنتصل بك لتأكيد تفاصيل التوصيل"
+          "description": "سنتصل بك لتأكيد تفاصيل التوصيل",
+          "descriptionsent": "سنتصل بك لتأكيد تفاصيل التوصيل"
+
         },
         "delivery": {
           "title": "التوصيل",
-          "description": "ادفع نقداً عند وصول طلبك"
+          "description": "ادفع نقداً عند وصول طلبك",
+          "descriptionsent": "اذا كانت عملية الدفع تمت بنجاح سيتم شحن طلبك خلال 24-72 ساعة"
+
         }
       }
     }

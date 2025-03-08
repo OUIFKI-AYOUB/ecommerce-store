@@ -8,13 +8,16 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import useCart from "@/hooks/use-cart";
 import { useTranslations, useLocale } from "next-intl";
 import { HtmlContent } from "@/components/ui/html-content";
+import MiniCartPreview from '@/components/ui/mini-cart-preview';
 
 interface InfoProps {
   data: Product;
   showDescription?: boolean;
+  onColorSelect?: (color: Color | null) => void; // Make it optional
+
 }
 
-const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
+const Info: React.FC<InfoProps> = ({ data, showDescription = true, onColorSelect }) => {
   const [selectedSize, setSelectedSize] = useState<Size | null>(null);
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -22,9 +25,22 @@ const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
   const cart = useCart();
   const t = useTranslations("product");
   const locale = useLocale();
+  const [showMiniCart, setShowMiniCart] = useState(false);
+
+  
 
   const hasSizes = data.sizes.length > 0;
   const hasColors = data.colors.length > 0;
+
+
+  const handleColorSelect = (color: Color | null) => {
+    setSelectedColor(color);
+    // Only call onColorSelect if it exists
+    if (onColorSelect) {
+      onColorSelect(color);
+    }
+  };
+  
 
   const getAvailableQuantity = (): number => {
     if (!hasSizes && !hasColors) return data.quantity || 0;
@@ -69,15 +85,18 @@ const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
   const handleAddToCart = () => {
     setMessage(null);
 
-    if (hasSizes && !selectedSize) {
-      setMessage(t("alerts.selectSize"));
-      return;
-    }
 
     if (hasColors && !selectedColor) {
       setMessage(t("alerts.selectColor"));
       return;
     }
+
+    if (hasSizes && !selectedSize) {
+      setMessage(t("alerts.selectSize"));
+      return;
+    }
+
+
 
     const availableQuantity = getAvailableQuantity();
     if (quantity > availableQuantity) {
@@ -87,6 +106,8 @@ const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
 
     cart.addItem(data, quantity, selectedSize || undefined, selectedColor || undefined);
     setMessage(t("alerts.addedToCart"));
+    setShowMiniCart(true); // Show mini cart preview
+
   };
 
   const isCompletelyOutOfStock = (): boolean => {
@@ -143,18 +164,31 @@ const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
                 `}
                 style={type === "color" ? { backgroundColor: (option as Color).value } : {}}
                 onClick={() => {
-                  if (isAvailable) {
-                    if (selectedOption?.id === option.id) {
-                      setOption(null);
-                    } else {
-                      setOption(option as any);
+                  if (type === "color") {
+                    if (isAvailable) {
+                      if (selectedOption?.id === option.id) {
+                        handleColorSelect(null);
+                      } else {
+                        handleColorSelect(option as Color);
+                      }
+                      setQuantity(1);
+                      setMessage(null);
                     }
-                    setQuantity(1);
-                    setMessage(null);
+                  } else {
+                    if (isAvailable) {
+                      if (selectedOption?.id === option.id) {
+                        setOption(null);
+                      } else {
+                        setOption(option as any);
+                      }
+                      setQuantity(1);
+                      setMessage(null);
+                    }
                   }
                 }}
                 disabled={!isAvailable}
               >
+                
                 {type === "size" ? (option as Size).name : null}
                 {!isAvailable && type === "color" && (
                   <div className="relative w-full h-full flex items-center justify-center">
@@ -246,9 +280,18 @@ const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
           {data.name}
         </h1>
         <div className="mt-2">
-          <p className="text-xl text-gray-900 dark:text-gray-100 rtl:text-right">
-            <Currency value={data?.price} />
-          </p>
+          <div className="text-xl text-gray-900 dark:text-gray-100 rtl:text-right">
+          <div className="flex items-center space-x-2 rtl:space-x-reverse">
+          {data.originalPrice && (
+            <span className="text-base text-rose-400 dark:text-red-300 line-through">
+              <Currency value={data.originalPrice} />
+            </span>
+          )}
+          <span><Currency value={data.price} /></span>
+
+        </div>
+         
+          </div>
         </div>
       </div>
 
@@ -335,6 +378,12 @@ const Info: React.FC<InfoProps> = ({ data, showDescription = true }) => {
           </div>
         </div>
       )}
+            <MiniCartPreview 
+        isOpen={showMiniCart}
+        onClose={() => setShowMiniCart(false)}
+        product={data}
+        quantity={quantity}
+      />
     </div>
   );
 };

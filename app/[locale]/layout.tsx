@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   title: "Matjar leafifat",
   description: "Matjar leafifat",
   icons: {
-    icon: '/images/log.jpg',
-    apple: '/images/log.jpg'
+    icon: '/images/loga.png',
+    apple: '/images/loga.png'
   }
 };
 

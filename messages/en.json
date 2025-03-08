@@ -23,7 +23,7 @@
       "none": "None",
       "RELATED_PRODUCTS": "Related Products",
       "alerts": {
-        "selectSize": "Please select a size and a color before adding to cart",
+        "selectSize": "Please select a size  before adding to cart",
         "selectColor": "Please select a color before adding to cart",
         "limitedStock": "Only {count} items available",
         "addedToCart": "Item added to cart successfully!"
@@ -54,6 +54,7 @@
     "payWithCard": "Pay with Card",
     "cashOnDelivery": "Cash on Delivery",
     "processing": "Processing...",
+    "virement":"Bank Transfer",
     "emptyCart": "No items in cart",
     "placeOrder": "Place Order (Cash on Delivery)",
     "checkoutCard": "Checkout with Card",
@@ -61,6 +62,8 @@
     "size": "Size",
     "color": "Color",
     "quantity": "Quantity",
+    "deliveryCost": "Delivery Cost",
+    "allCities": "Other Moroccan Cities (40 DH)",
     "total": "Total",
     "stockLimit": "Only {count} items available.",
     "toasts": {
@@ -101,14 +104,41 @@
     "city": "City",
     "cityPlaceholder": "Enter your city",
     "deliveryCost": "Delivery Cost",
-    "allCities": "All Cities (40 MAD)",
+    "allCities": "Other Cities (40 DH)",
     "address": "Shipping Address",
     "addressPlaceholder": "Enter your shipping address",
     "subtotal": "Subtotal",
     "total": "Total",
     "confirmOrder": "Confirm Order",
+    "sentorder": "Send Order",
+    "shopNow": "Shop Now",
+
+        "accountNumberCopied": "Account number copied ",
+    "ibanCopied": "IBAN copied ",
+    "NameAccCopied": "Name of the account holder copied",
+
     "processing": "Processing...",
-    "fillFields": "Please fill in all fields"
+    "fillFields": "Please fill necessary fields",
+    "NumNom": "Number and street name",
+    "NumNomPlaceholder": "Enter your street name and number",
+    "Batiment": "Building, apartment, residence, neighborhood... (optional)",
+    "BatimentPlaceholder": "Building, apartment, residence, neighborhood...",
+    "Email": "Email (optional)",
+    "EmailPlaceholder": "Enter your email",
+    "virement":"Bank Transfer",
+    "iban":"IBAN number",
+    "accountHolder":  "Account holder's name" ,
+    "accountNumber":"Account number ", 
+    "bankDetails":"Account holder's information ",
+    "fieldRequired": "This field is required",
+    "Nomsentmoney":"Name of the account holder from which the transfer is made",
+"acceptpay": "The request is accepted when the bank transfer is completed",
+"noImage": "No image",
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity",
+    "orderSummary": "Order Summary"
+
 },
 
 "mobile-nav": {
@@ -150,26 +180,35 @@
         },
         "shipping": {
           "title": "Shipping Soon",
-          "description": "Your order will be shipped within 24-48 hours"
+          "description": "Your order will be shipped within 24-72 hours"
         }
       }
     },
     "cod": {
       "title": "Order Placed Successfully!",
+      "sent": "Order Sented Successfully!",
+
+
       "subtitle": "Thank you for shopping with us",
       "continueButton": "Continue Shopping",
       "steps": {
         "processing": {
           "title": "Order Processing",
-          "description": "Your order is being processed by our team"
+          "description": "Your order is being processed by our team",
+          "descriptionsent": "Your order is being processed by our team"
+
         },
         "confirmation": {
           "title": "Confirmation Call",
-          "description": "We'll call you to confirm delivery details"
+          "description": "We'll call you to confirm delivery details",
+          "descriptionsent": "We'll call you to confirm delivery details"
+
         },
         "delivery": {
           "title": "Delivery",
-          "description": "Pay cash when your order arrives"
+          "description": "Pay cash when your order arrives",
+          "descriptionsent": "If payment sucesssed Your order will be shipped within 24-72 hours"
+
         }
       }
     }

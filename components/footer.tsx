@@ -19,12 +19,22 @@ const Footer = () => {
     <footer className="flex flex-col md:flex-row bg-gray-100 dark:bg-gray-800">
       {/* Store Information Section */}
       <div className="flex-1 flex flex-col p-5">
-        <h1 className="text-base font-bold"> متجر العفيفات 🌺</h1>
-        <p className="my-5 text-sm">
-          بيع الملابس الشرعية نقابات عباءات حجابات
-          <br />
-          قفازات كل ما تحتاجه المرأة المسلمة
-        </p>
+  <div className="flex items-center"> {/* Add this container */}
+    <h1 className="text-base font-bold mr-2">متجر العفيفات</h1> {/* Add margin-right for spacing */}
+    <Image
+      src="/images/loga.png"
+      alt="transfer"
+      width={40}
+      height={15}
+      className="dark:opacity-90"
+    />
+  </div>
+  <p className="my-5 text-sm">
+    بيع الملابس الشرعية نقابات عباءات حجابات
+    <br />
+    قفازات كل ما تحتاجه المرأة المسلمة
+  </p>
+
         <div className="flex">
           {[
             { Icon: Facebook, color: '#4267B2', link: 'https://web.facebook.com/amina.sahrawi.355' },
@@ -84,13 +94,38 @@ const Footer = () => {
             </div>  
           </div>
         ))}
-        <Image
-          src="/images/carda.png"
-          alt="Payment methods"
-          width={220}
-          height={60}
-          className="dark:opacity-90"
-        />
+       <div className="flex flex-row items-center space-x-2  dark:bg-gray-300 p-2 w-[200px] rounded-md">
+  <Image
+    src="/images/visa.png"
+    alt="Visa"
+    width={35}
+    height={12}
+    className="dark:opacity-90"
+  />
+    <Image
+    src="/images/mast.png"
+    alt="Mastercard"
+    width={35}
+    height={12}
+    className="dark:opacity-90"
+  />
+  <Image
+    src="/images/paypal.png"
+    alt="PayPal"
+    width={35}
+    height={12}
+    className="dark:opacity-90"
+  />
+
+    <Image
+    src="/images/transfer.png"
+    alt="transfer"
+    width={35}
+    height={12}
+    className="dark:opacity-90"
+  />
+</div>
+
       </div>
       
 

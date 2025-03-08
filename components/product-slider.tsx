@@ -103,7 +103,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ title, products }) => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] p-2 transition-transform duration-300"
+              className="min-w-[50%] md:min-w-[33.333%] lg:min-w-[25%] p-[7px] transition-transform duration-300"
             >
               <ProductCard data={product} />
             </div>

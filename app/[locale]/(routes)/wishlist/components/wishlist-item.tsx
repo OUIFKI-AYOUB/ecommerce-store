@@ -57,9 +57,9 @@ const WishlistItem: React.FC<CartItemProps> = ({ data }) => {
           <div className="flex gap-6 ">
             <button 
               onClick={onNavigateToProduct}
-              className="rounded-full bg-gray-800 dark:bg-white flex justify-center items-center transition-all duration-500 hover:bg-pink-500 dark:hover:bg-pink-500 hover:scale-110 w-10 h-10"
+              className="rounded-full bg-gray-100 dark:bg-white flex justify-center items-center transition-all duration-500 hover:bg-pink-500 dark:hover:bg-pink-500 hover:scale-110 w-10 h-10"
             >
-              <ShoppingCart size={20} className=" text-zinc-100 dark:text-gray-600" />
+              <ShoppingCart size={20} className=" text-gry-700 dark:text-gray-600" />
             </button>
             
             <IconButton

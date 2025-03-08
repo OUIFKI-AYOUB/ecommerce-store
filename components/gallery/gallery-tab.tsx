@@ -7,42 +7,40 @@ import Image from "next/image";
 
 interface GalleryTabProps {
     mediaItem: Media,
-    
+    isHighlighted?: boolean;
+
 }
 
-const GalleryTab: React.FC<GalleryTabProps> = ({
-    mediaItem
-}) => {
+interface GalleryTabProps {
+    mediaItem: Media;
+    isHighlighted?: boolean;
+  }
+  
+  const GalleryTab = ({ mediaItem, isHighlighted }: GalleryTabProps) => {
     return (
-        <Tab className="relative flex aspect-square cursor-pointer items-center justify-center rounded-md bg-white">
-            {({ selected }) => (
-                <div>
-                    <span className="absolute h-full w-full aspect-square inset-0 overflow-hidden rounded-md">
-                        {mediaItem.type === MediaType.IMAGE ? (
-                            <Image
-                                fill
-                                src={mediaItem.url}
-                                alt=""
-                                className="object-cover object-center"
-                            />
-                        ) : (
-                            <video
-                            className="object-contain w-full h-full"
-                            src={mediaItem.url}
-                            controls={false}
-                            muted
-                            playsInline
-                        />
-                        )}
-                    </span>
-                    <span className={cn(
-                        "absolute inset-0 rounded-md ring-2 ring-offset-2",
-                        selected ? "ring-black dark:ring-pink-600" : "ring-transparent"
-                    )} />
-                </div>
-            )}
-        </Tab>
+      <Tab className="relative flex aspect-square cursor-pointer items-center justify-center rounded-md bg-white">
+        {({ selected }) => (
+          <div>
+            <span className="absolute h-full w-full aspect-square inset-0 overflow-hidden rounded-md">
+              <Image
+                fill
+                src={mediaItem.url}
+                alt=""
+                className={cn(
+                  "object-cover object-center transition-all duration-200",
+                  isHighlighted && "ring-2 ring-pink-500 scale-105"
+                )}
+              />
+            </span>
+            <span className={cn(
+              "absolute inset-0 rounded-md ring-2 ring-offset-2",
+              selected ? "ring-black dark:ring-pink-600" : "ring-transparent",
+              "hover:ring-gray-300"
+            )} />
+          </div>
+        )}
+      </Tab>
     );
-}
-
+  };
+  
 export default GalleryTab;
